@@ -9,7 +9,6 @@
 #ifdef _WIN32
 #include <winsock2.h>
 #include <WS2tcpip.h>
-#include <ws2def.h>
 //If on Unix or POSIX Compliant Systems
 #elif __unix__
 #include <sys/socket.h>
