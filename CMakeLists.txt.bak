@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.17)
+project(PlayerLink_Core)
+
+set(CMAKE_CXX_STANDARD 20)
+##set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+
+#Set all directories to include in building
+file(GLOB_RECURSE crypto_SOURCES # All Cryptography Source Files
+        "${CMAKE_SOURCE_DIR}/crypto/*.h"
+        "${CMAKE_SOURCE_DIR}/crypto/*.c"
+        "${CMAKE_SOURCE_DIR}/crypto/*.cpp")
+file(GLOB_RECURSE net_SOURCES # All Network Sources
+        "${CMAKE_SOURCE_DIR}/net/*.h"
+        "${CMAKE_SOURCE_DIR}/net/*.c"
+        "${CMAKE_SOURCE_DIR}/net/*.cpp")
+file(GLOB_RECURSE win_SOURCES # Windows specific code
+        "${CMAKE_SOURCE_DIR}/platform/win32/*.h"
+        "${CMAKE_SOURCE_DIR}/platform/win32/*.c"
+        "${CMAKE_SOURCE_DIR}/platform/win32/*.cpp")
+file(GLOB_RECURSE posix_SOURCES # POSIX specific code
+        "${CMAKE_SOURCE_DIR}/platform/posix/*.h"
+        "${CMAKE_SOURCE_DIR}/platform/posix/*.c"
+        "${CMAKE_SOURCE_DIR}/platform/posix/*.cpp")
+
+source_group("common_SOURCES" FILES ${crypto_SOURCES} ${net_SOURCES})
+
+if(WIN32)
+    set(os_SOURCES ${win_SOURCES})
+else()
+    set(os_SOURCES ${posix_SOURCES})
+endif()
+message(STATUS ${common_SOURCES})
+add_library(PlayerLink_Core STATIC library.cpp library.h ${common_SOURCES} ${os_SOURCES})
