@@ -21,7 +21,6 @@
 #define DEFAULT_TCP_PORT 270500
 #define DEFAULT_UDP_PORT 200800
 #define SA struct sockaddr
-#endif //PLAYERLINK_CORE_SOCKET_H
 
 /**
  * The simplest Socket interface. Enforces sending/recieving of data
@@ -41,3 +40,4 @@ public:
     void BytesSend(char *message);
 
 };
+#endif //PLAYERLINK_CORE_SOCKET_H
