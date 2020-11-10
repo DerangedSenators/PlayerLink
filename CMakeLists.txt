@@ -12,4 +12,7 @@ add_library(PlayerLink_Core SHARED library.cpp library.h
         net/Socket.h
         )
 
-add_executable(PlayerLink_Server main.cpp) # Builds the server.
+add_executable(PlayerLink_Server server/main.cpp
+        net/Protocols.h net/Socket.h server/ServerSocket.cpp server/ServerSocket.h
+        server/logger/Logger.cpp server/logger/Logger.h
+        ) # Builds the server.
