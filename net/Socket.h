@@ -20,23 +20,4 @@
 #define DEFAULT_TCP_PORT 270500
 #define DEFAULT_UDP_PORT 200800
 #define SA struct sockaddr
-
-/**
- * The simplest Socket interface. Enforces sending/recieving of data
- * @author Hanzalah Ravat
- */
-class Socket{
-    /**
-     * Task to be completed when Bytes are recieved from remote
-     * @param bytes An array of bytes
-     */
-    virtual void onBytesRecv(char bytes[]) = 0;
-public:
-    /**
-     * Takes a set of bytes and sends to the remote
-     * @param message The message in the form of bytes
-     */
-    void BytesSend(char *message);
-
-};
 #endif //PLAYERLINK_CORE_SOCKET_H
