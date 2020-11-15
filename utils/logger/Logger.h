@@ -2,8 +2,8 @@
 // Created by Hanzalah Ravat on 08/11/2020.
 //
 
-#ifndef PLAYERLINK_SERVER_LOGGER_H
-#define PLAYERLINK_SERVER_LOGGER_H
+#ifndef PLAYERLINK_CORE_LOGGER_H
+#define PLAYERLINK_CORE_LOGGER_H
 
 
 #include <string>
@@ -41,4 +41,4 @@ private:
 };
 
 
-#endif //PLAYERLINK_SERVER_LOGGER_H
+#endif //PLAYERLINK_CORE_LOGGER_H
