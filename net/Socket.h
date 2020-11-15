@@ -17,7 +17,6 @@
 #endif //WIN64 or Linux checks for the compiler
 // Protocols
 #include "Protocols.h"
-#define DEFAULT_TCP_PORT 270500
-#define DEFAULT_UDP_PORT 200800
+#include "NetConfig.h"
 #define SA struct sockaddr
 #endif //PLAYERLINK_CORE_SOCKET_H
