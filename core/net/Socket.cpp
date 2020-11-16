@@ -18,14 +18,14 @@ int Socket::getSocketDescriptor() const {return mSocketFD;}
 #ifdef _WIN32
 
 void Socket::close() {
-    if(!IsClosed){
+    if(!socketIsClosed){
         ::closesocket(mSocketFD);
         IsClosed = true;
     }
 }
 #elif _unix_
 void Socket::close() {
-    if(!IsClosed){
+    if(!socketIsClosed){
         ::close(mSocketFD);
         IsClosed = true;
     }
