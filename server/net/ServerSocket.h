@@ -5,7 +5,7 @@
 #ifndef PLAYERLINK_SERVER_SOCKET_H
 #define PLAYERLINK_SERVER_SOCKET_H
 
-#include "../../net/Socket.h"
+#include "net/Socket.h"
 #define MAX  //Max size of a buffer
 class ServerSocket {
 

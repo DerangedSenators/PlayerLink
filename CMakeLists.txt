@@ -3,6 +3,7 @@ project(PlayerLink)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include_directories(core)
 # PlayerLink Core Library Components
 add_library(
         PlayerLink_Core

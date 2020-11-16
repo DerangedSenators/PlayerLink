@@ -7,7 +7,8 @@
 
 #include <deque>
 #include <iostream>
-#include "../../net/NetConfig.h"
+#include <thread>
+#include "net/NetConfig.h"
 
 
 class Client {

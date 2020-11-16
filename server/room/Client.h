@@ -5,7 +5,7 @@
 #ifndef PLAYERLINK_SERVER_CLIENT_H
 #define PLAYERLINK_SERVER_CLIENT_H
 
-#include "../../net/Socket.h"
+#include "net/Socket.h"
 class Client {
 public:
     /**
