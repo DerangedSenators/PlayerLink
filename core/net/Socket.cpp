@@ -35,7 +35,7 @@ void Socket::close() {
 std::string Socket::getAddress() const {
     sockaddr_in address;
     uint32_t addressLength = sizeof(address);
-    if(getpeername(mSocketFD, reinterpret_cast<sockaddr *>(&address), reinterpret_cast<socklen_t *>(addressLength)) < 0){
+    if(getpeername(mSocketFD, (sockaddr *)&address, (socklen_t  *)addressLength) < 0){
         throw SocketException("Fetch of Remote Address Failed");
     }
     return inet_ntoa(address.sin_addr);
@@ -44,7 +44,7 @@ std::string Socket::getAddress() const {
 uint32_t Socket::getPort() const{
     sockaddr_in address;
     uint32_t addressLength = sizeof(address);
-    if(getpeername(mSocketFD, reinterpret_cast<sockaddr *>(&address), reinterpret_cast<socklen_t *>(addressLength)) < 0){
+    if(getpeername(mSocketFD, (sockaddr *)&address, (socklen_t  *)addressLength) < 0){
         throw SocketException("Fetch of Remote Port Failed");
     }
     return ntohs(address.sin_port);
