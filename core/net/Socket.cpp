@@ -20,14 +20,14 @@ int Socket::getSocketDescriptor() const {return mSocketFD;}
 void Socket::close() {
     if(!socketIsClosed){
         ::closesocket(mSocketFD);
-        IsClosed = true;
+        socketIsClosed = true;
     }
 }
 #elif _unix_
 void Socket::close() {
     if(!socketIsClosed){
         ::close(mSocketFD);
-        IsClosed = true;
+        socketIsClosed = true;
     }
 }
 #endif
