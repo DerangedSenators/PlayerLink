@@ -18,5 +18,31 @@
 // Protocols
 #include "Protocols.h"
 #include "NetConfig.h"
+#include "SocketException.h"
 #define SA struct sockaddr
+#include <string>
+
+class Socket{
+public:
+    Socket(int family, int type, int flag);
+    explicit Socket(int fd);
+
+    std::string getAddress() const;
+    uint32_t getPort() const;
+
+    int getSocketDescriptor() const;
+
+    void close();
+    bool isClosed();
+
+    bool setBlocking(bool swtch);
+
+
+    int getLastError();
+
+protected:
+    int mSocketFD;
+    bool socketIsClosed;
+    bool isBlocked;
+};
 #endif //PLAYERLINK_CORE_SOCKET_H
