@@ -6,14 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 # PlayerLink Core Library Components
 add_library(
         PlayerLink_Core
-        crypto/hash/sha/sha256.cpp
-        crypto/hash/sha/sha256.h
+        core/crypto/hash/sha/sha256.cpp
+        core/crypto/hash/sha/sha256.h
 
-        crypto/pki/DFH.c
+        core/crypto/pki/DFH.c
 
-        net/Protocols.h
-        net/Socket.h
-        net/NetConfig.h)
+        core/net/Protocols.h
+        core/net/Socket.h
+        core/net/NetConfig.h)
 # PlayerLink Client Shared Library (DLL)
 add_library(
         PlayerLink_Client SHARED
@@ -25,9 +25,9 @@ add_executable(
         server/main.cpp
         server/net/ServerSocket.cpp
         server/net/ServerSocket.h
-        utils/logger/Logger.cpp
-        utils/logger/Logger.h
-        utils/logger/LogSeverity.h
+        core/utils/logger/Logger.cpp
+        core/utils/logger/Logger.h
+        core/utils/logger/LogSeverity.h
         server/room/Client.cpp
         server/room/Client.h
         server/room/GameRoom.cpp
