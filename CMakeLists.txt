@@ -14,7 +14,7 @@ add_library(
 
         core/net/Protocols.h
         core/net/Socket.h
-        core/net/NetConfig.h)
+        core/net/NetConfig.h core/net/SocketException.cpp core/net/SocketException.h core/net/Socket.cpp)
 # PlayerLink Client Shared Library (DLL)
 add_library(
         PlayerLink_Client SHARED
