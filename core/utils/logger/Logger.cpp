@@ -5,7 +5,5 @@
 #include "Logger.h"
 
 
-void Logger::createNewLogger(std::string path, LogSeverity logSeverity) {
 
-}
 
