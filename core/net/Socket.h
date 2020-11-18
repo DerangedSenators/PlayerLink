@@ -22,6 +22,8 @@
 #define SA struct sockaddr
 #include <string>
 
+typedef char rawType;
+
 class Socket{
 public:
     Socket(int family, int type, int flag);
