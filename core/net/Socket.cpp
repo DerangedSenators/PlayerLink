@@ -49,13 +49,28 @@ uint32_t Socket::getPort() const{
     }
     return ntohs(address.sin_port);
 }
-//
-// WIP: Find portable or Win32API Equivalent of fcntl
-// Currently Returns provided value.
+
+#ifdef __linux__ 
 bool Socket::setBlocking(bool swtch) {
-    isBlocked = swtch;
-    return swtch;
+    int arg = fcntl(mSocketFD, F_GETFL, NULL);
+    if (swtch == true) {
+        arg &= (~O_NONBLOCK);
+    }
+    else {
+        arg |= O_NONBLOCK;
+    }
+    fcntl(mSocketFD, F_SETFL, arg);
 }
+#elif _WIN32
+bool Socket::setBlocking(bool swtch) {
+    u_long blockMode = 0;
+    if (!swtch) {
+        blockMode = 1;
+    }
+    ioctlsocket(mSocketFD, FIONBIO, &blockMode);
+    return true;
+}
+#endif
 
 bool Socket::isClosed() {
     if(!socketIsClosed){
