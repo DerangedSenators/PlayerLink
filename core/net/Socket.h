@@ -23,6 +23,7 @@
 #include "SocketException.h"
 #define SA struct sockaddr
 #include <string>
+#include <cstring>
 
 typedef char rawType;
 
