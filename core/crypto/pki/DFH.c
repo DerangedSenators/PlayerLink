@@ -28,5 +28,5 @@ void generateSecret(struct DFHValues *dfhValues){
 int compute(unsigned long commonPrime){
     struct DFHValues dfhValues;
     dfhValues.commonPrime = commonPrime;
-
+    return 0;
 }
