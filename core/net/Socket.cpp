@@ -51,13 +51,15 @@ uint32_t Socket::getPort() const{
 }
 //
 // WIP: Find portable or Win32API Equivalent of fcntl
+// Currently Returns provided value.
 bool Socket::setBlocking(bool swtch) {
     isBlocked = swtch;
+    return swtch;
 }
 
 bool Socket::isClosed() {
     if(!socketIsClosed){
-        int optval;
+        char optval;
         socklen_t optlen = sizeof(optval);
         int res = getsockopt(mSocketFD,SOL_SOCKET,SO_ERROR,&optval,&optlen);
         if(optval == 0 && res == 0){
@@ -65,7 +67,12 @@ bool Socket::isClosed() {
         } else{
             socketIsClosed = false;
         }
+        return socketIsClosed;
     }
+    else {
+        return true;
+    }
+    
 }
 
 int Socket::getLastError() {
