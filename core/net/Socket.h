@@ -14,6 +14,8 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <fcntl.h>
+#include <poll.h>
 #endif //WIN64 or Linux checks for the compiler
 // Protocols
 #include "Protocols.h"
