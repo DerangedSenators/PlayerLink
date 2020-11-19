@@ -3,7 +3,7 @@
 #include <vector>
 #include "net/tcp/tcpsocket.h"
 
-class __declspec(dllimport) TCPServer : public Socket {
+class TCPServer : public Socket {
 public:
 	TCPServer();
 
