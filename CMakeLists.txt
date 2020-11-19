@@ -34,6 +34,8 @@ add_executable(
         server/room/Client.h
         server/room/GameRoom.cpp
         server/room/GameRoom.h
+        server/net/TCPServer.h 
+        server/net/TCPServer.cpp
 )
 
 target_link_libraries(PlayerLink_Server PRIVATE PlayerLink_Core)
