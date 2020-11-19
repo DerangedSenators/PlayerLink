@@ -14,22 +14,27 @@ add_library(
 
         core/net/Protocols.h
         core/net/Socket.h
-        core/net/NetConfig.h core/net/SocketException.cpp core/net/SocketException.h core/net/Socket.cpp core/net/tcp/tcpsocket.h core/net/tcp/tcpsocket.cpp 
+        core/net/NetConfig.h 
+        core/net/SocketException.cpp 
+        core/net/SocketException.h 
+        core/net/Socket.cpp 
+        core/net/tcp/tcpsocket.h 
+        core/net/tcp/tcpsocket.cpp 
+        core/utils/logger/Logger.cpp
+        core/utils/logger/Logger.h
+        core/utils/logger/LogSeverity.h
 )
 # PlayerLink Client Shared Library (DLL)
 add_library(
         PlayerLink_Client SHARED
 
-        client/net/Client.cpp client/net/Client.h)
+        client/net/Client.cpp client/net/Client.h )
 # Build Server Program
 add_executable(
         PlayerLink_Server
         server/main.cpp
         server/net/ServerSocket.cpp
         server/net/ServerSocket.h
-        core/utils/logger/Logger.cpp
-        core/utils/logger/Logger.h
-        core/utils/logger/LogSeverity.h
         server/room/Client.cpp
         server/room/Client.h
         server/room/GameRoom.cpp
