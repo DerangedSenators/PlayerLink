@@ -1,6 +1,0 @@
-#ifndef PLAYERLINK_CORE_LIBRARY_H
-#define PLAYERLINK_CORE_LIBRARY_H
-
-void hello();
-
-#endif //PLAYERLINK_CORE_LIBRARY_H
