@@ -24,6 +24,13 @@ add_library(
         core/utils/logger/Logger.h
         core/utils/logger/LogSeverity.h
 )
+FIND_PACKAGE(Boost)
+IF (Boost_FOUND)
+    message("Boost Found")
+    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
+    ADD_DEFINITIONS( "-DHAS_BOOST" )
+ENDIF()
+find_package(Boost COMPONENTS thread REQUIRED)
 # PlayerLink Client Shared Library (DLL)
 add_library(
         PlayerLink_Client SHARED
@@ -43,5 +50,6 @@ add_executable(
         server/net/TCPServer.cpp
 )
 
+target_link_libraries(PlayerLink_Core PRIVATE Boost::thread)
 target_link_libraries(PlayerLink_Server PRIVATE PlayerLink_Core)
 target_link_libraries(PlayerLink_Client PRIVATE PlayerLink_Core)
