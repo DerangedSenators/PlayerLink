@@ -7,38 +7,31 @@
 
 
 #include <string>
+#include <mutex>
 #include "LogSeverity.h"
 
-class Logger {
-// Fields
-public:
-
+class Logger{
 private:
-    std::string filePath;
-    LogSeverity loggingSeverity;
-//Method Declarations
+    static Logger* mInstance;
+    static std::mutex mMutex;
+    Logger();
+    ~Logger();
+
 public:
     /**
-     * Will log the message if the severity is within recording range.
-     * @param level  The log severity
-     * @param message The message to be logged
+     * Singleton Class should not be cloneable
      */
-    static void log(LogSeverity level,std::string message);
+     Logger(Logger &otherLogger) = delete;
 
-private:
-    void writeAllLogs();
-    /**
-     * Formats a log before writing to log file
-     * @param message The message sent from the application
-     * @param severity The severity of the Log
-     */
-    void formatLog(std::string message,LogSeverity severity);
-    /**
-     * Appends a Log
-     * @param log
-     */
-    void appendLog(std::string log);
+     /**
+      * Singleton classes must not be assignable
+      */
+      void operator = (const Logger&) = delete;
+
+      static Logger *getLogger();
+
+      void log(LogSeverity severity, std::string message);
+
 };
-
 
 #endif //PLAYERLINK_CORE_LOGGER_H
