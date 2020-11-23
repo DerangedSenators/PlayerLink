@@ -21,10 +21,12 @@ public:
 	bool canReceive(int timeout = 10000);
 	size_t recieve(void* buffer, size_t bufferLength);
 	size_t recieveAll(void* buffer, size_t bufferLength);
+	unsigned char* TCPSocket::recieveBytes();
 	bool setRecvTimeout(int seconds = TIMEOUT_SECONDS, int microseconds = TIMEOUT_MICROSECONDS);
 
 	size_t send(void const* buffer, size_t bufferLength);
 	size_t sendAll(void const* buffer, size_t bufferLength);
+	bool sendBytes(unsigned char* message);
 	bool setSendTimeout(int seconds = TIMEOUT_SECONDS, int microseconds = TIMEOUT_MICROSECONDS);
 private:
 	struct pollfd mPollFD;

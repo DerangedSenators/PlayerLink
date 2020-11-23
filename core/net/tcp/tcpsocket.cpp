@@ -116,6 +116,24 @@ size_t TCPSocket::recieveAll(void* buffer, size_t bufferLength) {
 	return toReturn;
 }
 
+unsigned char* TCPSocket::recieveBytes() {
+	uint32_t length;
+	// Recieve network byte order
+	if (recieveAll(&length, sizeof length) != sizeof length) {
+		return 0;
+	}
+
+	length = ntohl(length);
+	unsigned char* message;
+	if (recieveAll(&message, length) != length) {
+		return 0;
+	}
+	else {
+		return message;
+	}
+
+}
+
 size_t TCPSocket::send(void const* buffer, size_t bufferLength) {
 	return ::send(mSocketFD, (rawType*)buffer, bufferLength, 0);
 }
@@ -134,6 +152,20 @@ size_t TCPSocket::sendAll(void const* buffer, size_t bufferLength) {
 		toReturn += result;
 	}
 	return toReturn;
+}
+
+bool TCPSocket::sendBytes(unsigned char* message) {
+	bool success = true; // Innocent until proven Guilty
+	size_t byteLen = sizeof message;
+	byteLen = htonl(byteLen);
+	// Send length to remote
+	if (sendAll(&byteLen, sizeof byteLen) != sizeof byteLen) {
+		success = false;
+	}
+	if (success == true && sendAll(message, sizeof message) != sizeof message) {
+		success = false;
+	}
+	return success;
 }
 
 bool TCPSocket::setSendTimeout(int seconds, int microseconds) {
