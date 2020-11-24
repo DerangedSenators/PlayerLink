@@ -41,15 +41,15 @@ jobs:
     - name: test
       run: cd build && ctest
 
-  build-windows:
+#  build-windows:
 
-    runs-on: windows-latest
+#   runs-on: windows-latest
     
-    steps:
-    - uses: actions/checkout@v1
-    - name: configure
-      run: mkdir build && cd build && cmake ..
-    - name: build
-      run: cmake --build build --config Debug
-    - name: test
-      run: cd build && ctest
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: configure
+#      run: mkdir build && cd build && cmake ..
+#    - name: build
+#      run: cmake --build build --config Debug
+#    - name: test
+#      run: cd build && ctest
