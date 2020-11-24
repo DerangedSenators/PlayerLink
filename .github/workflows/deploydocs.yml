@@ -15,8 +15,8 @@ jobs:
            working-directory: "."
        - name: Doxybook
          run: |
-           chmod +x doxygentomd.sh
-           ./doxygentomd.sh
+           sudo chmod +x doxygentomd.sh
+           sudo ./doxygentomd.sh
        - name: Deploy Docs
          uses: mhausenblas/mkdocs-deploy-gh-pages@master
          env:
