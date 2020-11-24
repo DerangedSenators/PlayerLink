@@ -1,5 +1,8 @@
 site_name: PlayerLink
 nav:
     - Home: index.md
-    - Classes: index_classes.md
+    - Classes: Classes/index.md
+    - Examples: Examples/index.md
+    - Modules: Modules/index.md
+    - Namespaces: Namespaces/index.md
 theme: material
