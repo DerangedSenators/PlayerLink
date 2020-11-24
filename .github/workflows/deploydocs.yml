@@ -20,10 +20,11 @@ jobs:
         doxyfile-path: "./Doxyfile" # default is ./Doxyfile
         # Working directory
         working-directory: "." # default is .
-    - name: Doxybook
-      run: chmod +x doxygentomd.sh
-      run: ./doxygentomd.sh
-    - name: Deploy docs
+    -name: Doxybook
+      run: |
+      chmod +x doxygentomd.sh
+      ./doxygentomd.sh
+    -name: Deploy docs
     uses: mhausenblas/mkdocs-deploy-gh-pages@master
     # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
     env:
