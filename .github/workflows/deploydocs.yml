@@ -16,6 +16,7 @@ jobs:
        - name: Doxybook
          run: |
            sudo chmod +x doxygentomd.sh
+           sudo chmod +x doxygen/doxybook2
            sudo ./doxygentomd.sh
        - name: Deploy Docs
          uses: mhausenblas/mkdocs-deploy-gh-pages@master
