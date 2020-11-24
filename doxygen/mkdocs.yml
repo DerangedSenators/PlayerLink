@@ -1,0 +1,5 @@
+site_name: PlayerLink
+nav:
+    - Home: index.md
+    - Classes: index_classes.md
+theme: material
