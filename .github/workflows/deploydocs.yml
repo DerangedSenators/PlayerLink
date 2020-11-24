@@ -12,9 +12,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
         
-    - name: Doxygen Action
+     name: Doxygen Action
       uses: mattnotmitt/doxygen-action@v1.1.0
       with:
         # Path to Doxyfile
@@ -22,12 +23,13 @@ jobs:
         # Working directory
         working-directory: "." # default is .
 
-    - name: Doxybook
+     name: Doxybook
+      run: chmod +x doxygentomd.sh
       run: ./doxygentomd.sh
     
-    - name: Deploy docs
+     name: Deploy docs
     uses: mhausenblas/mkdocs-deploy-gh-pages@master
     # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CUSTOM_DOMAIN: playerlink.derangedsenators.com
+      CUSTOM_DOMAIN: playerlink.derangedsenators.me
