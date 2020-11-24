@@ -8,4 +8,16 @@ nav:
 theme:
     name: material
     favicon: images/favicon.ico
+    features:
+        - navigation.tabs
+        - toc.integrate    
+    palette:
+        - scheme: default
+          primary: blue
+          accent: light blue
+extra:
+    social:
+        - icon: fontawesome/brands/github
+          link: https://github.com/DerangedSenators
+          name: DerangedSenators on Github
 copyright: Copyright &copy; 2020 Deranged Senators

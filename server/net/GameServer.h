@@ -29,11 +29,21 @@
 #include "net/ServerCodes.h"
 
 #define THREAD_COUNT 3
+/**
+ * @brief A GameServer object which is used to host a game or lobby. It uses three threads to efficiently do this; An accept thread to allow new players to join, a read thread to read packets sent by players to the server and a write thread to relay those messages to the other players
+*/
 class GameServer {
 public:
+	/**
+	 * @brief Constructs a GameServer
+	 * @return 
+	*/
 	GameServer();
 	~GameServer();
-
+	/**
+	 * @brief Starts the GameServer
+	 * @param name 
+	*/
 	void start(std::string name);
 private:
 	/**
