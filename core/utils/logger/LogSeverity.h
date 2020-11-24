@@ -15,7 +15,6 @@
  */
 #ifndef PLAYERLINK_CORE_LOGSEVERITY_H
 #define PLAYERLINK_CORE_LOGSEVERITY_H
-
 enum LogSeverity{
     FATAL,
     ERROR,

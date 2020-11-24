@@ -23,24 +23,52 @@
 #define TIMEOUT_MICROSECONDS 0
 
 /// <summary>
-/// TCPSocket Class extends base socket class
+/// TCPSocket Class extends the base socket class
 /// </summary>
 class TCPSocket : public Socket {
 public:
 	explicit TCPSocket(int fd);
 	explicit TCPSocket();
 
+	/**
+	 * @brief Connects to an address and port
+	 * @param address The destination address
+	 * @param port The destination port
+	 * @return True if connection was successful and false if there was a problem
+	*/
 	bool connect(std::string address, std::string port);
+	/**
+	 * @brief Connects to an address and port with a timeout
+	 * @param address The destination address
+	 * @param port The destination port
+	 * @param seconds The number of seconds to wait for a reply
+	 * @param microseconds The number of microseconds to wait for a reply
+	 * @return True if connection was successful and false if there was a problem
+	*/
 	bool connectWithTimeout(std::string address, std::string port, int seconds = TIMEOUT_SECONDS, int microseconds = TIMEOUT_MICROSECONDS);
-
+	/**
+	 * @brief Checks if the remote machine can recieve
+	 * @param timeout The number of microseconds to wait before returning false
+	 * @return True if remote is able to recieve packets and false if it can't or does not respond
+	*/
 	bool canReceive(int timeout = 10000);
+
 	size_t recieve(void* buffer, size_t bufferLength);
 	size_t recieveAll(void* buffer, size_t bufferLength);
+	/**
+	 * @brief Recieves bytes from the remote
+	 * @return an char* type used to hold incoming bytes
+	*/
 	unsigned char* TCPSocket::recieveBytes();
 	bool setRecvTimeout(int seconds = TIMEOUT_SECONDS, int microseconds = TIMEOUT_MICROSECONDS);
 
 	size_t send(void const* buffer, size_t bufferLength);
 	size_t sendAll(void const* buffer, size_t bufferLength);
+	/**
+	 * @brief Sends bytes to remote
+	 * @param message The bytes in a unsigned char*
+	 * @return True if message was recieved successfully
+	*/
 	bool sendBytes(unsigned char* message);
 	bool setSendTimeout(int seconds = TIMEOUT_SECONDS, int microseconds = TIMEOUT_MICROSECONDS);
 private:
