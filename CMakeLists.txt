@@ -44,7 +44,9 @@ FIND_PACKAGE(Boost)
 IF (Boost_FOUND)
     message("Boost Found")
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-    ADD_DEFINITIONS( "-DHAS_BOOST" )
+    INCLUDE_DIRECTORIES(${BOOST_LIBRARY_DIR})
+    ADD_DEFINITIONS( "-DBOOST_ALL_NO_LIB " )
+    set( Boost_USE_STATIC_LIBS ON ) # or Off, depending on what you want
 ENDIF()
 find_package(Boost COMPONENTS thread REQUIRED)
 
