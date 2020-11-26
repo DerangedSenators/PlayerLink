@@ -34,8 +34,16 @@ jobs:
           done
         fi
     # build project
+    - name: set environment variables
+      run: |
+        
     - name: configure
-      run: mkdir build && cd build && cmake ..
+      run: |
+        export BOOST_ROOT= ~/boost
+        export BOOST_INCLUDEDIR= ~/boost
+        export BOOST_LIBRARYDIR= ~/boost/libs
+        mkdir build && cd build && cmake ..
+        
     - name: build
       run: cmake --build build
     - name: test
