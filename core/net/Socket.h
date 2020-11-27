@@ -29,6 +29,11 @@
 #include <fcntl.h>
 #include <poll.h>
 #endif //WIN64 or Linux checks for the compiler
+#ifdef __unix__
+#define socketPoll poll
+#elif _WIN32
+#define socketPoll WSAPoll
+#endif
 // Protocols
 #include "Protocols.h"
 #include "NetConfig.h"
