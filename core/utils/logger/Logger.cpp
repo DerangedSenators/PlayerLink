@@ -15,6 +15,11 @@
  */
 
 #include "Logger.h"
+
+namespace PlayerLink{namespace Core{
+
+}}
+
 Logger::Logger() {}
 Logger::~Logger() {}
 

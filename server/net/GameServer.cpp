@@ -15,6 +15,10 @@
  */
 #include "GameServer.h"
 
+namespace PlayerLink{namespace Server{
+
+}}
+
 GameServer::GameServer() : mRunSignal(true) {
 	mTCPServerSocket.listen(DEFAULT_TCP_PORT);
 }

@@ -15,3 +15,7 @@
  */
 
 #include "Client.h"
+
+namespace PlayerLink{namespace Server{
+
+}}

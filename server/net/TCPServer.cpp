@@ -15,6 +15,10 @@
  */
 #include "TCPServer.h"
 
+namespace PlayerLink{namespace Server{
+
+}}
+
 TCPServer::TCPServer() : Socket(AF_INET, SOCK_STREAM, AF_UNSPEC) {}
 
 void TCPServer::listen(std::string port, int backlog) {

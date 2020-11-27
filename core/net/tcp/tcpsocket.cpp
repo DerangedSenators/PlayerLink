@@ -1,5 +1,8 @@
 #include "tcpsocket.h"
 
+namespace PlayerLink{namespace Core{
+
+}}
 
 TCPSocket::TCPSocket(int fd) : Socket(fd) {
 	mPollFD.fd = mSocketFD;

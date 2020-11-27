@@ -15,6 +15,11 @@
  */
 #include "Socket.h"
 
+
+namespace PlayerLink {namespace Core {
+}}
+
+
 Socket::Socket(int family, int type, int flag) : socketIsClosed(false) {
     mSocketFD = ::socket(family,type,flag);
     if(mSocketFD == -1){
