@@ -16,6 +16,8 @@ jobs:
     # install and cache dependencies
     - name: Install boost
       run: sudo apt-get install libboost-all-dev
+    - name: configure
+      run: mkdir build && cd build && cmake ..
     - name: build
       run: cmake --build build
     - name: test
@@ -31,6 +33,6 @@ jobs:
     - name: configure
       run: mkdir build && cd build && cmake ..
     - name: build
-      run: cmake --build build --config Debug
+      run: cmake --build build
     - name: test
       run: cd build && ctest
