@@ -14,12 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     # install and cache dependencies
-    - name: Cache boost
-      uses: actions/cache@v1.0.3
-      id: cache-boost
-      with:
-        path: "~/boost"
-        key: libboost-all-dev
     - name: Install boost
       run: sudo apt-get install libboost-all-dev
     - name: build
