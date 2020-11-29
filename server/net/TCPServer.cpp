@@ -75,7 +75,7 @@ void TCPServer::unmonitor(TCPSocket& fd) {
 
 std::vector<TCPSocket> TCPServer::getSocketEvents(int timeout) {
 	std::vector<TCPSocket> events;
-	int status = socketPoll(&mMonitorFDs[0], mMonitorFDs.size(), timeout);
+	int status = SOCKETPOLL(&mMonitorFDs[0], mMonitorFDs.size(), timeout);
 	if (status == -1) {
 		throw SocketException("Error while pooling socket connection");
 	}
