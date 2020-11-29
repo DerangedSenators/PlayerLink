@@ -30,9 +30,9 @@
 #include <poll.h>
 #endif //WIN64 or Linux checks for the compiler
 #ifdef __unix__
-#define socketPoll poll
+#define SOCKETPOLL poll
 #elif _WIN32
-#define socketPoll WSAPoll
+#define SOCKETPOLL WSAPoll
 #endif
 // Protocols
 #include "Protocols.h"

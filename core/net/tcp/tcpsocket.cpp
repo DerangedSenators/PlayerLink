@@ -80,7 +80,7 @@ bool TCPSocket::connectWithTimeout(std::string address, std::string port, int se
 	mPollFD.events = POLLIN;
 }
 bool TCPSocket::canReceive(int timeout) {
-	int status = socketPoll(&mPollFD, 1, timeout);
+	int status = SOCKETPOLL(&mPollFD, 1, timeout);
 	if (status == -1) {
 		throw SocketException("Error while pooling connection");
 	}
