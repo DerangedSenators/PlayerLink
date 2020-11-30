@@ -17,12 +17,12 @@
 #define PLAYERLINK_CORE_SOCKET_H
 //Network related includes:
 //If on windows
-#ifdef _WIN32
+#ifdef WIN32
 #include <winsock2.h>
 #include <WS2tcpip.h>
 #pragma comment(lib, "Ws2_32.lib")
 //If on Unix or POSIX Compliant Systems
-#elif __unix__
+#elif UNIX
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
@@ -31,8 +31,10 @@
 #endif //WIN64 or Linux checks for the compiler
 #ifdef __unix__
 #define SOCKETPOLL poll
+#define CLOSESOCKET close
 #elif _WIN32
 #define SOCKETPOLL WSAPoll
+#define CLOSESOCKET closesocket
 #endif
 // Protocols
 #include "Protocols.h"
@@ -45,6 +47,7 @@
 typedef char rawType;
 /**
  * @brief Lowest socket implementation. This class will be used by top level socket implementations
+ * @author Hanzalah Ravat
 */
 class Socket{
 public:
@@ -74,8 +77,9 @@ public:
     int getSocketDescriptor() const;
     /**
      * @brief Closes the connection
+     * @return True if socket closes or false if there was an error while closing the socket
     */
-    void close();
+    bool close();
     /**
      * @brief 
      * @return true if the socket connection has been closed or false if it is still open 

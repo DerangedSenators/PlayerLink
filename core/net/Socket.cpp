@@ -26,22 +26,13 @@ Socket::Socket(int fd) :mSocketFD(fd), socketIsClosed(false){}
 
 int Socket::getSocketDescriptor() const {return mSocketFD;}
 
-#ifdef _WIN32
-
-void Socket::close() {
-    if(!socketIsClosed){
-        ::closesocket(mSocketFD);
-        socketIsClosed = true;
+bool Socket::close() {
+    if (!socketIsClosed) {
+        int status = CLOSESOCKET(mSocketFD);
+        return status == 0;
     }
+    return true;
 }
-#elif _unix_
-void Socket::close() {
-    if(!socketIsClosed){
-        ::close(mSocketFD);
-        socketIsClosed = true;
-    }
-}
-#endif
 
 std::string Socket::getAddress() const {
     sockaddr_in address;
