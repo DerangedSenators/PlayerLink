@@ -44,20 +44,9 @@
 #include <string>
 #include <cstring>
 
-typedef char rawType;
-/**
- * @brief Lowest socket implementation. This class will be used by top level socket implementations
- * @author Hanzalah Ravat
-*/
-class Socket{
-public:
-    /**
-     * @brief Constructs a Socket object
-     * @param family Address Family. 
-     * @param type The type specification for the new socket
-     * @param flag The protocol used for data transmission
-     * @return If no error occurs, socket returns a descriptor referencing the new socket. Otherwise, a value of -1
-    */
+
+namespace PlayerLink{namespace Core{
+    typedef char rawType;
     Socket(int family, int type, int flag);
     explicit Socket(int fd);
     /**
@@ -91,25 +80,20 @@ public:
      * @return The result of the blocking, True if blocking was successful or false if there was an issue with changing the blocking status
     */
     bool setBlocking(bool swtch);
+}}
+
+/**
+ * @brief Lowest socket implementation. This class will be used by top level socket implementations
+ * @author Hanzalah Ravat
+*/
+
 
     /**
-     * @brief 
-     * @return The last error number 
+     * @brief Lowest socket implementation. This class will be used by top level socket implementations
     */
-    int getLastError();
 
-protected:
-    /**
-     * @brief File Descriptor for this socket instance
-    */
-    int mSocketFD;
-    /**
-     * @brief Flag if socket is open or closed
-    */
-    bool socketIsClosed;
-    /**
-     * @brief Boolean to determine if blocking is enabled on this socket instance
-    */
-    bool isBlocked;
-};
+ 
+
+
+
 #endif //PLAYERLINK_CORE_SOCKET_H

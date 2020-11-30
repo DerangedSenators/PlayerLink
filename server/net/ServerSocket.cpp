@@ -15,7 +15,9 @@
  */
 #include "ServerSocket.h"
 
+namespace PlayerLink{namespace Server{
 
+}}
 
 
 

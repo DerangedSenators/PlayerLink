@@ -15,12 +15,16 @@
  */
 #ifndef PLAYERLINK_CORE_LOGSEVERITY_H
 #define PLAYERLINK_CORE_LOGSEVERITY_H
-enum LogSeverity{
-    FATAL,
-    ERROR,
-    WARNING,
-    INFO,
-    DEBUG,
-    TRACE
-};
+
+namespace PlayerLink{namespace Core{
+    enum LogSeverity {
+        FATAL,
+        ERROR,
+        WARNING,
+        INFO,
+        DEBUG,
+        TRACE
+    };
+}}
+
 #endif //PLAYERLINK_CORE_LOGSEVERITY_H

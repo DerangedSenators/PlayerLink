@@ -14,3 +14,7 @@
  * limitations under the License.
  */
 #include "Client.h"
+
+namespace PlayerLink{namespace Client{
+
+}}

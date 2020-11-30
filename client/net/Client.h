@@ -22,10 +22,13 @@
 #include <thread>
 #include "net/NetConfig.h"
 
+namespace PlayerLink{namespace Client{
+	class Client {
 
-class Client {
+	};
+}}
 
-};
+
 
 
 #endif //PLAYERLINK_CORE_CLIENT_H

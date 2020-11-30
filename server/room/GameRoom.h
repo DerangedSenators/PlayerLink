@@ -17,21 +17,26 @@
 #define PLAYERLINK_SERVER_GAMEROOM_H
 #include "Client.h"
 #define MAX_PLAYERS 8 // For the default game room... Allow 8 concurrent connections to take place
-/**
- * A GameRoom is a class which holds all players in a game
- */
-class GameRoom {
-public:
+
+namespace PlayerLink{namespace Server{
+
     /**
-     * Broadcasts a message to all participants of a room
-     * @param message
-     */
-    void broadcast(char* message);
+    * A GameRoom is a class which holds all players in a game
+    */
+    class GameRoom {
+    public:
+        /**
+         * Broadcasts a message to all participants of a room
+         * @param message
+         */
+        void broadcast(char* message);
 
-private:
-    Client clients[MAX_PLAYERS];
+    private:
+        Client clients[MAX_PLAYERS];
 
-};
+    };
+}}
+ 
 
 
 #endif //PLAYERLINK_SERVER_GAMEROOM_H

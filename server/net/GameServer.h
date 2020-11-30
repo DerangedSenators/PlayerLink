@@ -27,53 +27,58 @@
 #include "Message.h"
 #include "Player.h"
 #include "net/ServerCodes.h"
-
+#include <net/tcp/tcpsocket.h>
 #define THREAD_COUNT 3
-/**
+using namespace PlayerLink::Core;
+namespace PlayerLink{namespace Server{
+	/**
  * @brief A GameServer object which is used to host a game or lobby. It uses three threads to efficiently do this; An accept thread to allow new players to join, a read thread to read packets sent by players to the server and a write thread to relay those messages to the other players
 */
-class GameServer {
-public:
-	/**
-	 * @brief Constructs a GameServer
-	 * @return 
-	*/
-	GameServer();
-	~GameServer();
-	/**
-	 * @brief Starts the GameServer
-	 * @param name 
-	*/
-	void start(std::string name);
-private:
-	/**
-	 * @brief 
-	 * @param arg 
-	 * @return 
-	
-	friend void* doServerAccept(void* arg);
-	friend void* doServerRead(void* arg);
-	friend void* doServerWrite(void* arg);
-	*/
-	void acceptLoop();
-	void readLoop();
-	void writeLoop();
+	class GameServer {
+	public:
+		/**
+		 * @brief Constructs a GameServer
+		 * @return
+		*/
+		GameServer();
+		~GameServer();
+		/**
+		 * @brief Starts the GameServer
+		 * @param name
+		*/
+		void start(std::string name);
+	private:
+		/**
+		 * @brief
+		 * @param arg
+		 * @return
 
-	void disconnectClient(TCPSocket& client);
-	
-	const std::string currentTime();
+		friend void* doServerAccept(void* arg);
+		friend void* doServerRead(void* arg);
+		friend void* doServerWrite(void* arg);
+		*/
+		void acceptLoop();
+		void readLoop();
+		void writeLoop();
 
-	bool mRunSignal;
-	TCPServer mTCPServerSocket;
+		void disconnectClient(TCPSocket& client);
 
-	std::string mRoomName;
-	std::deque<Message> mMessageQueue;
-	std::vector<TCPSocket> mClients;
-	std::map<std::string, Player> mPlayers;
+		const std::string currentTime();
 
-	std::mutex mQueueMutex;
-	boost::thread mAcceptThread, mReadThread, mWriteThread;
-	boost::thread_group mServerThreads;
-	
-};
+		bool mRunSignal;
+		TCPServer mTCPServerSocket;
+
+		std::string mRoomName;
+		std::deque<Message> mMessageQueue;
+		std::vector<TCPSocket> mClients;
+		std::map<std::string, Player> mPlayers;
+
+		std::mutex mQueueMutex;
+		boost::thread mAcceptThread, mReadThread, mWriteThread;
+		boost::thread_group mServerThreads;
+
+	};
+}}
+ 
+ 
 #endif

@@ -20,41 +20,45 @@
 /**
  * @brief TCPServer class based on Socket Class. Uses TCP communication and also functions as a server to listen and monitor socket connections
 */
-class TCPServer : public Socket {
-public:
-	/**
-	 * @brief Constructs a TCPServer object
-	 * @return 
-	*/
-	TCPServer();
-	/**
-	 * @brief Listens to incoming bytes on a specified port
-	 * @param port The port you wish to monitor
-	 * @param backlog 
-	*/
-	void listen(std::string port, int backlog = 5);
-	/**
-	 * @brief Method to accept incomming connection request
-	 * @return TCPSocket Object used to hold information and methods to send/recieve information from them
-	*/
-	TCPSocket accept();
-	/**
-	 * @brief Monitors the provided socket
-	 * @param fd The File Descriptor for the socket you want to monitor
-	*/
-	void monitorSocket(TCPSocket &fd);
-	/**
-	 * @brief Stops monitoring the provided socket
-	 * @param fd The File Descriptor for the socket you no longer want to monitor
-	*/
-	void unmonitor(TCPSocket& fd);
-	/**
-	 * @brief Gets the socket Events
-	 * @param timeout 
-	 * @return SocketEvents in a vector
-	*/
-	std::vector<TCPSocket> getSocketEvents(int timeout = 10000);
-private:
-	std::vector<struct pollfd> mMonitorFDs;
-};
+using namespace PlayerLink::Core; 
+namespace PlayerLink{namespace Server{
+	class TCPServer : public Socket {
+	public:
+		/**
+		 * @brief Constructs a TCPServer object
+		 * @return
+		*/
+		TCPServer();
+		/**
+		 * @brief Listens to incoming bytes on a specified port
+		 * @param port The port you wish to monitor
+		 * @param backlog
+		*/
+		void listen(std::string port, int backlog = 5);
+		/**
+		 * @brief Method to accept incomming connection request
+		 * @return TCPSocket Object used to hold information and methods to send/recieve information from them
+		*/
+		TCPSocket accept();
+		/**
+		 * @brief Monitors the provided socket
+		 * @param fd The File Descriptor for the socket you want to monitor
+		*/
+		void monitorSocket(TCPSocket& fd);
+		/**
+		 * @brief Stops monitoring the provided socket
+		 * @param fd The File Descriptor for the socket you no longer want to monitor
+		*/
+		void unmonitor(TCPSocket& fd);
+		/**
+		 * @brief Gets the socket Events
+		 * @param timeout
+		 * @return SocketEvents in a vector
+		*/
+		std::vector<TCPSocket> getSocketEvents(int timeout = 10000);
+	private:
+		std::vector<struct pollfd> mMonitorFDs;
+	};
+}}
+
 #endif

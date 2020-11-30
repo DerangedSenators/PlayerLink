@@ -15,83 +15,81 @@
  */
 #include "Socket.h"
 
-Socket::Socket(int family, int type, int flag) : socketIsClosed(false) {
-    mSocketFD = ::socket(family,type,flag);
-    if(mSocketFD == -1){
-        throw SocketException("Error when creating Socket");
+
+namespace PlayerLink {namespace Core {
+    Socket::Socket(int family, int type, int flag) : socketIsClosed(false) {
+        mSocketFD = ::socket(family, type, flag);
+        if (mSocketFD == -1) {
+            throw SocketException("Error when creating Socket");
+        }
     }
-}
 
-Socket::Socket(int fd) :mSocketFD(fd), socketIsClosed(false){}
+    Socket::Socket(int fd) :mSocketFD(fd), socketIsClosed(false) {}
 
-int Socket::getSocketDescriptor() const {return mSocketFD;}
-
-bool Socket::close() {
-    if (!socketIsClosed) {
-        int status = CLOSESOCKET(mSocketFD);
-        return status == 0;
+    int Socket::getSocketDescriptor() const { return mSocketFD; }
+  
+    std::string Socket::getAddress() const {
+        sockaddr_in address;
+        uint32_t addressLength = sizeof(address);
+        if (getpeername(mSocketFD, (sockaddr*)&address, (socklen_t*)addressLength) < 0) {
+            throw SocketException("Fetch of Remote Address Failed");
+        }
+        return inet_ntoa(address.sin_addr);
     }
-    return true;
-}
 
-std::string Socket::getAddress() const {
-    sockaddr_in address;
-    uint32_t addressLength = sizeof(address);
-    if(getpeername(mSocketFD, (sockaddr *)&address, (socklen_t  *)addressLength) < 0){
-        throw SocketException("Fetch of Remote Address Failed");
+    uint32_t Socket::getPort() const {
+        sockaddr_in address;
+        uint32_t addressLength = sizeof(address);
+        if (getpeername(mSocketFD, (sockaddr*)&address, (socklen_t*)addressLength) < 0) {
+            throw SocketException("Fetch of Remote Port Failed");
+        }
+        return ntohs(address.sin_port);
     }
-    return inet_ntoa(address.sin_addr);
-}
-
-uint32_t Socket::getPort() const{
-    sockaddr_in address;
-    uint32_t addressLength = sizeof(address);
-    if(getpeername(mSocketFD, (sockaddr *)&address, (socklen_t  *)addressLength) < 0){
-        throw SocketException("Fetch of Remote Port Failed");
-    }
-    return ntohs(address.sin_port);
-}
 
 #ifdef __linux__ 
-bool Socket::setBlocking(bool swtch) {
-    int arg = fcntl(mSocketFD, F_GETFL, NULL);
-    if (swtch == true) {
-        arg &= (~O_NONBLOCK);
-    }
-    else {
-        arg |= O_NONBLOCK;
-    }
-    fcntl(mSocketFD, F_SETFL, arg);
-}
-#elif _WIN32
-bool Socket::setBlocking(bool swtch) {
-    u_long blockMode = 0;
-    if (!swtch) {
-        blockMode = 1;
-    }
-    ioctlsocket(mSocketFD, FIONBIO, &blockMode);
-    return true;
-}
-#endif
-
-bool Socket::isClosed() {
-    if(!socketIsClosed){
-        char optval;
-        socklen_t optlen = sizeof(optval);
-        int res = getsockopt(mSocketFD,SOL_SOCKET,SO_ERROR,&optval,&optlen);
-        if(optval == 0 && res == 0){
-            socketIsClosed = true;
-        } else{
-            socketIsClosed = false;
+    bool Socket::setBlocking(bool swtch) {
+        int arg = fcntl(mSocketFD, F_GETFL, NULL);
+        if (swtch == true) {
+            arg &= (~O_NONBLOCK);
         }
-        return socketIsClosed;
+        else {
+            arg |= O_NONBLOCK;
+        }
+        fcntl(mSocketFD, F_SETFL, arg);
     }
-    else {
+#elif _WIN32
+    bool Socket::setBlocking(bool swtch) {
+        u_long blockMode = 0;
+        if (!swtch) {
+            blockMode = 1;
+        }
+        ioctlsocket(mSocketFD, FIONBIO, &blockMode);
         return true;
     }
-    
-}
+#endif
 
-int Socket::getLastError() {
-    return errno;
-}
+    bool Socket::isClosed() {
+        if (!socketIsClosed) {
+            char optval;
+            socklen_t optlen = sizeof(optval);
+            int res = getsockopt(mSocketFD, SOL_SOCKET, SO_ERROR, &optval, &optlen);
+            if (optval == 0 && res == 0) {
+                socketIsClosed = true;
+            }
+            else {
+                socketIsClosed = false;
+            }
+            return socketIsClosed;
+        }
+        else {
+            return true;
+        }
+
+    }
+
+    int Socket::getLastError() {
+        return errno;
+    }
+}}
+
+
