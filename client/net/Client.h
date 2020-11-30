@@ -19,7 +19,7 @@
 
 #include <deque>
 #include <iostream>
-#include <thread>
+#include <boost/thread.hpp>
 #include "net/NetConfig.h"
 
 namespace PlayerLink{namespace Client{
