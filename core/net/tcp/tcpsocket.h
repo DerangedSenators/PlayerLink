@@ -15,9 +15,6 @@
  */
 #ifndef PLAYERLINK_CORE_TCPSOCKET_H
 #define PLAYERLINK_CORE_TCPSOCKET_H
-#ifdef __linux__
-#include <poll.h>
-#endif
 #include "net/Socket.h"
 #define TIMEOUT_SECONDS 2
 #define TIMEOUT_MICROSECONDS 0
@@ -76,6 +73,4 @@ namespace PlayerLink{namespace Core{
 		struct pollfd mPollFD;
 	};
 }}
-
-
 #endif

@@ -74,29 +74,25 @@ namespace PlayerLink{namespace Server{
 		}
 	}
 
-	std::vector<TCPSocket> TCPServer::getSocketEvents(int timeout) {
-		std::vector<TCPSocket> events;
-#ifdef __linux__
-		int status = poll(&mMonitorFDs[0], mMonitorFDs.size(), timeout);
-#elif _WIN32
-		int status = WSAPoll(&mMonitorFDs[0], mMonitorFDs.size(), timeout);
-#endif
-		if (status == -1) {
-			throw SocketException("Error while pooling socket connection");
-		}
-		else if (status == 0) {
-			return events;
-		}
-		else {
-			for (auto pool_fd : mMonitorFDs) {
-				if (pool_fd.revents & POLLIN) {
-					pool_fd.revents = 0;
-					TCPSocket socket(static_cast<int> (pool_fd.fd));
-					events.push_back(socket);
-				}
-			}
-			return events;
-		}
+std::vector<TCPSocket> TCPServer::getSocketEvents(int timeout) {
+	std::vector<TCPSocket> events;
+	int status = SOCKETPOLL(&mMonitorFDs[0], mMonitorFDs.size(), timeout);
+	if (status == -1) {
+		throw SocketException("Error while pooling socket connection");
 	}
+	else if (status == 0) {
+		return events;
+	}
+	else {
+		for (auto pool_fd : mMonitorFDs) {
+			if (pool_fd.revents & POLLIN) {
+				pool_fd.revents = 0;
+				TCPSocket socket(static_cast<int> (pool_fd.fd));
+				events.push_back(socket);
+			}
+		}
+		return events;
+	}
+}
 }}
 

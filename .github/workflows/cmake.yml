@@ -14,26 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     # install and cache dependencies
-    - name: Cache boost
-      uses: actions/cache@v1.0.3
-      id: cache-boost
-      with:
-        path: "~/boost"
-        key: libboost-all-dev
     - name: Install boost
-      env:
-        CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
-      run: |
-        if [[ "$CACHE_HIT" == 'true' ]]; then
-          sudo cp --force --recursive ~/boost/* /
-        else
-          sudo apt-get update && sudo apt-get install -yq libboost-all-dev
-          mkdir -p ~/boost
-          for dep in libboost-all-dev; do
-              dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/boost/
-          done
-        fi
-    # build project
+      run: sudo apt-get install libboost-all-dev
     - name: configure
       run: mkdir build && cd build && cmake ..
     - name: build
@@ -41,15 +23,16 @@ jobs:
     - name: test
       run: cd build && ctest
 
-#  build-windows:
+  build-windows:
 
-#   runs-on: windows-latest
-    
-#    steps:
-#    - uses: actions/checkout@v1
-#    - name: configure
-#      run: mkdir build && cd build && cmake ..
-#    - name: build
-#      run: cmake --build build --config Debug
-#    - name: test
-#      run: cd build && ctest
+   runs-on: windows-latest
+   steps:
+    - uses: actions/checkout@v2
+    - name: Install Boost
+      run: choco install boost-msvc-14.2
+    - name: configure
+      run: mkdir build && cd build && cmake ..
+    - name: build
+      run: cmake --build build
+    - name: test
+      run: cd build && ctest
