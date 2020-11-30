@@ -15,8 +15,13 @@
  */
 #ifndef PLAYERLINK_CORE_PROTOCOLS_H
 #define PLAYERLINK_CORE_PROTOCOLS_H
-enum Protocols{
-    TCP, //SOCK_STREAM
-    UDP  //SOCK_DGRAM
-};
+
+namespace PlayerLink{namespace Core{
+    enum Protocols {
+        TCP, //SOCK_STREAM
+        UDP  //SOCK_DGRAM
+    };
+}}
+
+
 #endif //PLAYERLINK_CORE_PROTOCOLS_H

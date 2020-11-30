@@ -19,23 +19,28 @@
 
 #include <string>
 #include <exception>
-/**
+
+namespace PlayerLink{namespace Core{
+    class SocketException : public std::exception {
+    private:
+        std::string mUserMessage; //Message for Exception
+    public:
+        /**
+         * @brief Creates a SocketException
+         * @param message A description of the error
+         * @return
+        */
+        SocketException(const std::string& message) throw();
+        ~SocketException() throw();
+        const char* what() const throw();
+
+    };
+}}
+ 
+ /**
  * @brief Socket Exception class used for socket errors
 */
-class SocketException : public std::exception {
-private:
-std::string mUserMessage; //Message for Exception
-public:
-    /**
-     * @brief Creates a SocketException 
-     * @param message A description of the error
-     * @return 
-    */
-    SocketException(const std::string &message) throw();
-    ~SocketException() throw();
-    const char *what() const throw();
 
-};
 
 
 #endif //PLAYERLINK_CORE_SOCKETEXCEPTION_H

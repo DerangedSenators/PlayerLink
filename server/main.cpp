@@ -16,10 +16,10 @@
 #include <iostream>
 
 namespace PlayerLink{namespace Server{
-
+    int main() {
+        std::cout << "Player Link Server" << std::endl;
+        return 0;
+    }
 }}
 
-int main() {
-    std::cout << "Player Link Server" << std::endl;
-    return 0;
-}
+
