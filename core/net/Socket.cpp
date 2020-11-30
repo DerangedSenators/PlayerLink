@@ -46,7 +46,7 @@ namespace PlayerLink {namespace Core {
         return ntohs(address.sin_port);
     }
 
-#ifdef __linux__ 
+#ifdef UNIX 
     bool Socket::setBlocking(bool swtch) {
         int arg = fcntl(mSocketFD, F_GETFL, NULL);
         if (swtch == true) {
@@ -86,7 +86,13 @@ namespace PlayerLink {namespace Core {
         }
 
     }
-
+    bool Socket::close() {
+        if (!socketIsClosed) {
+            int status = CLOSESOCKET(mSocketFD);
+            return status == 0;
+        }
+        return true;
+    }
     int Socket::getLastError() {
         return errno;
     }
