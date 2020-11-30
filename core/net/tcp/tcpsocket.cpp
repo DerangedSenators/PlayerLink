@@ -1,6 +1,7 @@
 #include "tcpsocket.h"
 
 
+
 TCPSocket::TCPSocket(int fd) : Socket(fd) {
 	mPollFD.fd = mSocketFD;
 	mPollFD.events = POLLIN;
@@ -79,11 +80,7 @@ bool TCPSocket::connectWithTimeout(std::string address, std::string port, int se
 	mPollFD.events = POLLIN;
 }
 bool TCPSocket::canReceive(int timeout) {
-#ifdef __linux__
-	int status = poll(&mPollFD, 1, timeout);
-#elif _WIN32
-	int status = WSAPoll(&mPollFD, 1, timeout);
-#endif
+	int status = SOCKETPOLL(&mPollFD, 1, timeout);
 	if (status == -1) {
 		throw SocketException("Error while pooling connection");
 	}
