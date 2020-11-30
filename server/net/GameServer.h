@@ -27,9 +27,9 @@
 #include "Message.h"
 #include "Player.h"
 #include "net/ServerCodes.h"
-#include <core\net\tcp\tcpsocket.h>
+#include <net/tcp/tcpsocket.h>
 #define THREAD_COUNT 3
-
+using namespace PlayerLink::Core;
 namespace PlayerLink{namespace Server{
 	/**
  * @brief A GameServer object which is used to host a game or lobby. It uses three threads to efficiently do this; An accept thread to allow new players to join, a read thread to read packets sent by players to the server and a write thread to relay those messages to the other players

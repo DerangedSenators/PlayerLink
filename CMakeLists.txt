@@ -64,6 +64,7 @@ add_library(
 # Build Server Program
 add_executable(
         PlayerLink_Server
+        
         server/main.cpp
         server/net/ServerSocket.cpp
         server/net/ServerSocket.h
@@ -77,7 +78,7 @@ add_executable(
         server/net/Player.h
         server/net/GameServer.h
         server/net/GameServer.cpp
- )
+  )
  
 target_link_libraries(PlayerLink_Core PRIVATE Boost::thread)
 #

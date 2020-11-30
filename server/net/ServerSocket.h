@@ -19,6 +19,7 @@
 #include "net/Socket.h"
 #define MAX  //Max size of a buffer
 
+using namespace PlayerLink::Core;
 namespace PlayerLink{namespace Server{
     class ServerSocket {
 

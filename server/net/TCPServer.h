@@ -20,7 +20,7 @@
 /**
  * @brief TCPServer class based on Socket Class. Uses TCP communication and also functions as a server to listen and monitor socket connections
 */
-
+using namespace PlayerLink::Core; 
 namespace PlayerLink{namespace Server{
 	class TCPServer : public Socket {
 	public:
