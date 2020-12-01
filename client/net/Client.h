@@ -74,7 +74,8 @@ namespace PlayerLink {
 
 			Core::TCPSocket mClientSocket;
 
-			std::deque<unsigned char*> mMessageQueue;
+			std::deque<unsigned char*> mMessageInQueue;
+			std::deque<unsigned char*> mMessageOutQueue;
 			std::string mServer, mPort, mUserName;
 			std::mutex mExitMutex;
 			boost::thread_group mThreadGroup;
