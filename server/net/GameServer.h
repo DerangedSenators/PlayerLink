@@ -48,15 +48,7 @@ namespace PlayerLink{namespace Server{
 		*/
 		void start(std::string name);
 	private:
-		/**
-		 * @brief
-		 * @param arg
-		 * @return
 
-		friend void* doServerAccept(void* arg);
-		friend void* doServerRead(void* arg);
-		friend void* doServerWrite(void* arg);
-		*/
 		void acceptLoop();
 		void readLoop();
 		void writeLoop();
