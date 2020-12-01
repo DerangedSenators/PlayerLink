@@ -129,22 +129,28 @@ size_t TCPSocket::recieveAll(void* buffer, size_t bufferLength) {
 }
 
 unsigned char* TCPSocket::recieveBytes() {
-	uint32_t length;
-	// Recieve network byte order
-	if (recieveAll(&length, sizeof length) != sizeof length) {
-		return 0;
-	}
-
-	length = ntohl(length);
-	unsigned char* message;
-	if (recieveAll(&message, length) != length) {
-		return 0;
+	unsigned char* buffer;
+	size_t byteCount, byteLength;
+	/* Read the Incoming Size*/
+	byteCount = recv(mSocketFD, (char*)&byteLength, sizeof(byteLength), 0);
+	if (byteCount < 0) {
+		throw SocketException("Error while recieving informaiton from the socket");
+		return NULL;
 	}
 	else {
-		return message;
-	}
+		byteLength = ntohl(byteLength);
+		buffer = new unsigned char[byteLength + 1];
+		// Read the bytes
+		byteCount = recv(mSocketFD,reinterpret_cast<char*>(buffer), byteLength, 0);
+		if (byteCount < 0) {
+			throw SocketException("Error when Parsing Data");
+			return NULL;
+		}
+		return buffer;
 
+	}
 }
+
 
 size_t TCPSocket::send(void const* buffer, size_t bufferLength) {
 	return ::send(mSocketFD, (rawType*)buffer, bufferLength, 0);

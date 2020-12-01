@@ -39,9 +39,8 @@ namespace PlayerLink{namespace Server{
 			std::string clientPort = std::to_string(client.getPort());
 			// ADD LOG INPUT HERE TO LOG THE CONNECTION
 			mQueueMutex.lock();
-			char username[DEFAULT_BUFFER_SIZE];
-			int result = client.recieve(&username, sizeof username); //Recieve a username to build up a player
-			if (result > 0) {
+			char username = (char)(client.recieveBytes());
+			if (username != NULL) {
 				Player mPlayer(std::to_string(client.getSocketDescriptor()), username, std::to_string(client.getPort()));
 				mPlayers[mPlayer.mIP + ":" + mPlayer.mID] = mPlayer;
 			}

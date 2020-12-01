@@ -19,12 +19,13 @@
 namespace PlayerLink{namespace Server{
 	typedef struct Player {
 		Player() {}
-		Player(std::string id, std::string userName, std::string ip) {
+		Player(std::string id, char userName, std::string ip) {
 			mID = id;
 			mUserName = userName;
 			mIP = ip;
 		}
-		std::string mID, mUserName, mIP;
+		std::string mID, mIP;
+		char mUserName;
 	}Player;
 }}
 
