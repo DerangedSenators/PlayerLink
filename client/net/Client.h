@@ -46,15 +46,20 @@ namespace PlayerLink {
 			*/
 			~Client();
 			/**
-			 * @brief Facilitates logging into the server
-			 * @param usrname Username used for this instance
-			 * @return True if login successful and false if not
+			 * @brief Creates a Session with the server using the provided username
+			 * @param usrName This Users username
+			 * @return 0 if the session runs and exits successfully
 			*/
 			bool login(std::string usrname);
 			/**
 			 * @brief Logs the user out and disconnects the connection from the server
 			*/
 			void logout();
+			/**
+			 * @brief Adds a message to the buffer to be sent to the server
+			 * @param message The byte array to be sent to the server
+			*/
+			void addMsgToBuffer(unsigned char* message);
 		private:
 			/**
 			 * @brief Read Loop used to read incoming messages
