@@ -38,6 +38,7 @@ add_library(
         core/utils/logger/Logger.cpp
         core/utils/logger/Logger.h
         core/utils/logger/LogSeverity.h
+        core/api.h
  )
 
 FIND_PACKAGE(Boost)
