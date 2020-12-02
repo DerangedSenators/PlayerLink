@@ -15,7 +15,11 @@
  */
 #ifndef PLAYERLINK_CORE_SERVER_CODES_H
 #define PLAYERLINK_CORE_SERVER_CODES_H
-#define DISCONNECT_REQUEST_CODE 0x2f65786974 //Hex code for '/exit'
+/*
+ * This code will be used to indicate that the client requests a disconnect from the server
+*/
+#define DISCONNECT_REQUEST_CODE 'exit'
+
 
 namespace PlayerLink{namespace Core{
 
