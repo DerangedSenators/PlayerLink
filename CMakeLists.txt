@@ -60,7 +60,9 @@ find_package(Boost COMPONENTS thread REQUIRED)
 add_library(
         PlayerLink_Client SHARED
 
-        client/net/Client.cpp client/net/Client.h )
+        client/net/Client.cpp
+        client/net/Client.h
+)
 # Build Server Program
 add_executable(
         PlayerLink_Server
