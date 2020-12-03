@@ -18,10 +18,10 @@
 #define PLAYERLINK_CORE_SOCKETEXCEPTION_H
 
 #include <string>
-#include <exception>
+#include "RuntimeException.h"
 
 namespace PlayerLink{namespace Core{
-    class SocketException : public std::exception {
+    class SocketException : public RuntimeException {
     private:
         std::string mUserMessage; //Message for Exception
     public:
