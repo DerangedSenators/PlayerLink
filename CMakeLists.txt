@@ -19,6 +19,7 @@ project(PlayerLink)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(core)
+
 # PlayerLink Core Library Components
 add_library(
         PlayerLink_Core
@@ -51,9 +52,11 @@ IF (Boost_FOUND)
 ENDIF()
 find_package(Boost 1.74.0 REQUIRED COMPONENTS thread date_time)
 
- #add_library(
- #    PlayerLink_Core_WIN32
- #)
+ add_library(
+     PlayerLink_Core_WIN32
+         platform/microsoft/win32/overlays/core/net/winsockinit.c
+         platform/microsoft/win32/overlays/core/net/winsockinit.h
+ )
 # add_library(
 #     PlayerLink_Core_UNIX
 # )
@@ -61,7 +64,9 @@ find_package(Boost 1.74.0 REQUIRED COMPONENTS thread date_time)
 add_library(
         PlayerLink_Client SHARED
 
-        client/net/Client.cpp client/net/Client.h )
+        client/net/Client.cpp
+        client/net/Client.h
+)
 # Build Server Program
 add_executable(
         PlayerLink_Server
@@ -82,12 +87,12 @@ add_executable(
   )
  
 target_link_libraries(PlayerLink_Core PRIVATE Boost::thread)
-#
-#IF(WIN32)
-#    target_link_libraries(PlayerLink_Core PRIVATE PlayerLink_Core_WIN32)
+
+IF(WIN32)
+        target_link_libraries(PlayerLink_Core PRIVATE PlayerLink_Core_WIN32)
 #ELSEIF(UNIX)
-#    target_link_libraries(PlayerLink_Core PRIVATE PlayerLink_Core_UNIX)
-#ENDIF()
+#        target_link_libraries(PlayerLink_Core PRIVATE PlayerLink_Core_UNIX)
+ENDIF()
 target_link_libraries(PlayerLink_Server PRIVATE PlayerLink_Core)
 target_link_libraries(PlayerLink_Client PRIVATE PlayerLink_Core)
 

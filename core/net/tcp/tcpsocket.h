@@ -57,7 +57,7 @@ namespace PlayerLink{namespace Core{
 		 * @brief Recieves bytes from the remote
 		 * @return an char* type used to hold incoming bytes
 		*/
-		unsigned char* TCPSocket::recieveBytes();
+		unsigned char* recieveBytes();
 
 		bool setRecvTimeout(int seconds = TIMEOUT_SECONDS, int microseconds = TIMEOUT_MICROSECONDS);
 
