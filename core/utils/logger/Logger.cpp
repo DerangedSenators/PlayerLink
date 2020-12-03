@@ -15,7 +15,9 @@
  */
 
 #include "Logger.h"
-
+#include <fstream>
+#include <chrono>
+#include <ctime>
 namespace PlayerLink{namespace Core{
     Logger::Logger() {}
     Logger::~Logger() {}
@@ -26,6 +28,25 @@ namespace PlayerLink{namespace Core{
             mInstance = new Logger();
         }
         return mInstance;
+    }
+    void Logger::log(LogSeverity severity, std::string message)
+    {
+   
+        //timing
+        using Clock = std::chrono::steady_clock;
+        auto tick = Clock::now;
+
+        std::string logSev = (severity,message);
+        
+        //files the logger
+        std::ofstream logFile;
+        logFile.open("LOG FILE.txt");
+        logFile << tick, logSev;
+        logFile << "/n";
+        logFile.close();
+
+
+
     }
 }}
 

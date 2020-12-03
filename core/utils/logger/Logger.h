@@ -23,6 +23,11 @@
 #include "LogSeverity.h"
 
 namespace PlayerLink{namespace Core{
+    /**
+     * @brief A Singelton Logger class which will be used by PlayerLink to create logs based on a severity level and append to a logfile
+     * @author Hanzalah Ravat
+     * @author Ashwin Jaimal
+     */
     class Logger {
     private:
         static Logger* mInstance;
@@ -32,17 +37,25 @@ namespace PlayerLink{namespace Core{
 
     public:
         /**
-         * Singleton Class should not be cloneable
+         * Singleton Class should not be cloneable. Constructor used to prevent multiple instances of Logger
          */
         Logger(Logger& otherLogger) = delete;
 
         /**
-         * Singleton classes must not be assignable
+         * Singleton classes must not be assignable. This method will prevent the class from being assingned
          */
         void operator = (const Logger&) = delete;
 
+        /**
+         * Gets the running logger instance pointer
+         * @return A pointer to the Logger Instance in memory
+         */
         static Logger* getLogger();
-
+        /**
+         * Method used to log an event
+         * @param severity The Severity level of the log
+         * @param message The message which will be written into the logfile
+         */
         void log(LogSeverity severity, std::string message);
 
     };
