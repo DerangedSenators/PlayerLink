@@ -1,4 +1,3 @@
-
 # Copyright 2020 Deranged Senators
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,86 +13,33 @@
 # limitations under the License.
 
 cmake_minimum_required(VERSION 3.17)
-project(PlayerLink)
+project(PlayerLink
+        VERSION 1.0.0
+        DESCRIPTION "Multiplayer API written in C++. Can be used for multiplayer games where server side processing needs to be kept as low as possible"
+        )
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories(core)
+include_directories(src/core)
 
-# PlayerLink Core Library Components
-add_library(
-        PlayerLink_Core
-        core/crypto/hash/sha/sha256.cpp
-        core/crypto/hash/sha/sha256.h
-
-        core/crypto/pki/DFH.c
-
-        core/net/Protocols.h
-        core/net/Socket.h
-        core/net/NetConfig.h 
-        core/net/SocketException.cpp 
-        core/net/SocketException.h 
-        core/net/Socket.cpp 
-        core/net/tcp/tcpsocket.h 
-        core/net/tcp/tcpsocket.cpp 
-        core/utils/logger/Logger.cpp
-        core/utils/logger/Logger.h
-        core/utils/logger/LogSeverity.h
- )
-
-FIND_PACKAGE(Boost)
-IF (Boost_FOUND)
-    message("Boost Found")
-    message(STATUS "Boost Version: ${Boost_VERSION}")
-    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-    INCLUDE_DIRECTORIES(${BOOST_LIBRARY_DIR})
-    ADD_DEFINITIONS( "-DBOOST_ALL_NO_LIB " )
-    set( Boost_USE_STATIC_LIBS ON ) # or Off, depending on what you want
-ENDIF()
-find_package(Boost 1.74.0 REQUIRED COMPONENTS thread date_time)
-
- add_library(
-     PlayerLink_Core_WIN32
-         platform/microsoft/win32/overlays/core/net/winsockinit.c
-         platform/microsoft/win32/overlays/core/net/winsockinit.h
- )
 # add_library(
 #     PlayerLink_Core_UNIX
 # )
-# PlayerLink Client Shared Library (DLL)
-add_library(
-        PlayerLink_Client SHARED
 
-        client/net/Client.cpp
-        client/net/Client.h
-)
-# Build Server Program
-add_executable(
-        PlayerLink_Server
-        
-        server/main.cpp
-        server/net/ServerSocket.cpp
-        server/net/ServerSocket.h
-        server/room/Client.cpp
-        server/room/Client.h
-        server/room/GameRoom.cpp
-        server/room/GameRoom.h
-        server/net/TCPServer.h 
-        server/net/TCPServer.cpp
-        server/net/Message.h
-        server/net/Player.h
-        server/net/GameServer.h
-        server/net/GameServer.cpp
-  )
- 
-target_link_libraries(PlayerLink_Core PRIVATE Boost::thread)
+include(include/boost.cmake)
+add_subdirectory(src/core)
+add_subdirectory(src/client)
+add_subdirectory(src/server)
+
+target_link_libraries(PLAYERLINK_CORE PRIVATE Boost::thread)
 
 IF(WIN32)
-        target_link_libraries(PlayerLink_Core PRIVATE PlayerLink_Core_WIN32)
+        add_subdirectory(src/platform/microsoft/win32/overlays/core)
+        target_link_libraries(PLAYERLINK_CORE PRIVATE PLAYERLINK_CORE_WIN32)
 #ELSEIF(UNIX)
 #        target_link_libraries(PlayerLink_Core PRIVATE PlayerLink_Core_UNIX)
 ENDIF()
-target_link_libraries(PlayerLink_Server PRIVATE PlayerLink_Core)
-target_link_libraries(PlayerLink_Client PRIVATE PlayerLink_Core)
+target_link_libraries(PLAYERLINK_SERVER PRIVATE PLAYERLINK_CORE)
+target_link_libraries(PLAYERLINK_CLIENT PRIVATE PLAYERLINK_CORE)
 
 
