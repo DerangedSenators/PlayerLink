@@ -18,7 +18,7 @@
 #define PLAYERLINK_CORE_SOCKETEXCEPTION_H
 
 #include <string>
-#include "RuntimeException.h"
+#include "utils/exceptions/RuntimeException.h"
 
 namespace PlayerLink{namespace Core{
     class SocketException : public RuntimeException {
@@ -30,7 +30,7 @@ namespace PlayerLink{namespace Core{
          * @param message A description of the error
          * @return
         */
-        SocketException(const std::string& message) throw();
+        SocketException(std::string  message) throw();
         ~SocketException() throw();
         const char* what() const throw();
 

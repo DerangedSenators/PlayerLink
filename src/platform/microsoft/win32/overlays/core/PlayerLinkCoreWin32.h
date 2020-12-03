@@ -13,28 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#ifndef PLAYERLINK_PLAYERLINKCOREWIN32_H
+#define PLAYERLINK_PLAYERLINKCOREWIN32_H
 
-
-#include "RuntimeException.h"
-#include "utils/logger/Logger.h"
-
-
-
-namespace PlayerLink{namespace Core{
-
-    //uses a class and method which retrieves first timestamp
-
-	RuntimeException::RuntimeException(const std::string& message)
-        throw () : runtimeMessage(message) {
-        
-        Logger* logger = Logger::getLogger();
-        
-        logger->log(ERROR,message);
-        
-    }
-
-    RuntimeException::~RuntimeException() throw() {}
-    const char* RuntimeException::what() const throw() {
-        return runtimeMessage.c_str();
-    }
-}}
+#endif //PLAYERLINK_PLAYERLINKCOREWIN32_H

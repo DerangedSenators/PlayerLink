@@ -15,9 +15,12 @@
  */
 #include "SocketException.h"
 
+#include <utility>
+
 namespace PlayerLink{namespace Core{
-    SocketException::SocketException(const std::string& message)
-        throw () : mUserMessage(message) {}
+
+    SocketException::SocketException(std::string  message)
+        throw () : mUserMessage(std::move(message)) {}
 
     SocketException::~SocketException() throw() {}
     const char* SocketException::what() const throw() {
