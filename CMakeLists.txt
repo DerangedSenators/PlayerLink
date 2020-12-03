@@ -18,27 +18,27 @@ project(PlayerLink)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories(core)
+include_directories(src/core)
 
 # PlayerLink Core Library Components
 add_library(
         PlayerLink_Core
-        core/crypto/hash/sha/sha256.cpp
-        core/crypto/hash/sha/sha256.h
+        src/core/crypto/hash/sha/sha256.cpp
+        src/core/crypto/hash/sha/sha256.h
 
-        core/crypto/pki/DFH.c
+        src/core/crypto/pki/DFH.c
 
-        core/net/Protocols.h
-        core/net/Socket.h
-        core/net/NetConfig.h 
-        core/net/SocketException.cpp 
-        core/net/SocketException.h 
-        core/net/Socket.cpp 
-        core/net/tcp/tcpsocket.h 
-        core/net/tcp/tcpsocket.cpp 
-        core/utils/logger/Logger.cpp
-        core/utils/logger/Logger.h
-        core/utils/logger/LogSeverity.h
+        src/core/net/Protocols.h
+        src/core/net/Socket.h
+        src/core/net/NetConfig.h
+        src/core/net/SocketException.cpp
+        src/core/net/SocketException.h
+        src/core/net/Socket.cpp
+        src/core/net/tcp/tcpsocket.h
+        src/core/net/tcp/tcpsocket.cpp
+        src/core/utils/logger/Logger.cpp
+        src/core/utils/logger/Logger.h
+        src/core/utils/logger/LogSeverity.h
  )
 
 FIND_PACKAGE(Boost)
@@ -54,8 +54,8 @@ find_package(Boost 1.74.0 REQUIRED COMPONENTS thread date_time)
 
  add_library(
      PlayerLink_Core_WIN32
-         platform/microsoft/win32/overlays/core/net/winsockinit.c
-         platform/microsoft/win32/overlays/core/net/winsockinit.h
+         src/platform/microsoft/win32/overlays/core/net/winsockinit.c
+         src/platform/microsoft/win32/overlays/core/net/winsockinit.h
  )
 # add_library(
 #     PlayerLink_Core_UNIX
@@ -64,26 +64,26 @@ find_package(Boost 1.74.0 REQUIRED COMPONENTS thread date_time)
 add_library(
         PlayerLink_Client SHARED
 
-        client/net/Client.cpp
-        client/net/Client.h
+        src/client/net/Client.cpp
+        src/client/net/Client.h
 )
 # Build Server Program
 add_executable(
         PlayerLink_Server
-        
-        server/main.cpp
-        server/net/ServerSocket.cpp
-        server/net/ServerSocket.h
-        server/room/Client.cpp
-        server/room/Client.h
-        server/room/GameRoom.cpp
-        server/room/GameRoom.h
-        server/net/TCPServer.h 
-        server/net/TCPServer.cpp
-        server/net/Message.h
-        server/net/Player.h
-        server/net/GameServer.h
-        server/net/GameServer.cpp
+
+        src/server/main.cpp
+        src/server/net/ServerSocket.cpp
+        src/server/net/ServerSocket.h
+        src/server/room/Client.cpp
+        src/server/room/Client.h
+        src/server/room/GameRoom.cpp
+        src/server/room/GameRoom.h
+        src/server/net/TCPServer.h
+        src/server/net/TCPServer.cpp
+        src/server/net/Message.h
+        src/server/net/Player.h
+        src/server/net/GameServer.h
+        src/server/net/GameServer.cpp
   )
  
 target_link_libraries(PlayerLink_Core PRIVATE Boost::thread)
