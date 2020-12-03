@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <WinSock2.h>
-#include <Windows.h>
-
 #include "winsockinit.h"
 
-bool init(){
+int init(void) {
     int iResult;
     WSADATA wsaData;
     iResult = WSAStartup(MAKEWORD(2,2),&wsaData);
     if(iResult !=0){
         //Throw some exception
-        return false;
-    } else{
-        return true;
+        return 0;
+    } else {
+        return 1;
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/**
+/*
  * @file winsockinit.c
  * @author Hanzalah Ravat
  * @brief The methods included within this file are used by Windows editions of PlayerLink to initialise the Winsock2 Library
@@ -27,11 +27,15 @@
 #ifndef PLAYERLINK_WINSOCKINIT_H
 #define PLAYERLINK_WINSOCKINIT_H
 
-/**
+
+#include <WinSock2.h>
+#include <Windows.h>
+
+/*
  * Attempts to initialise winsock2.dll
  * @return true if startup succeeds
  * @return false if there is an error when trying to initialise Winsock2.dll
  */
-bool init();
+int init(void);
 
 #endif //PLAYERLINK_WINSOCKINIT_H
