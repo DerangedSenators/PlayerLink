@@ -48,7 +48,7 @@ IF (Boost_FOUND)
     ADD_DEFINITIONS( "-DBOOST_ALL_NO_LIB " )
     set( Boost_USE_STATIC_LIBS ON ) # or Off, depending on what you want
 ENDIF()
-find_package(Boost COMPONENTS thread REQUIRED)
+find_package(Boost COMPONENTS Boost date_time thread REQUIRED)
 
  #add_library(
  #    PlayerLink_Core_WIN32
