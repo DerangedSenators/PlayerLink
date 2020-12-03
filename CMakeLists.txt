@@ -43,12 +43,13 @@ add_library(
 FIND_PACKAGE(Boost)
 IF (Boost_FOUND)
     message("Boost Found")
+    message(STATUS "Boost Version: ${Boost_VERSION}")
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
     INCLUDE_DIRECTORIES(${BOOST_LIBRARY_DIR})
     ADD_DEFINITIONS( "-DBOOST_ALL_NO_LIB " )
     set( Boost_USE_STATIC_LIBS ON ) # or Off, depending on what you want
 ENDIF()
-find_package(Boost COMPONENTS Boost date_time thread REQUIRED)
+find_package(Boost 1.74.0 REQUIRED COMPONENTS thread date_time)
 
  #add_library(
  #    PlayerLink_Core_WIN32
