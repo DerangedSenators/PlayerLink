@@ -37,10 +37,12 @@ namespace PlayerLink{namespace Core{
         auto tick = Clock::now;
 
         std::string logSev = (severity,message);
+        
         //files the logger
         std::ofstream logFile;
         logFile.open("LOG FILE.txt");
         logFile << tick, logSev;
+        logFile << "/n";
         logFile.close();
 
 

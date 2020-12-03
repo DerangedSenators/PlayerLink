@@ -24,7 +24,7 @@
 namespace PlayerLink{namespace Core{
 	/**
 	 * @author Ash Jaimal
-	 * @breif 
+	 * @breif exception class for Runtime environment, throws exceptions whenver an issue occurs with connectivity
 	*/
 	class RuntimeException : public std::exception {
 	private: 
