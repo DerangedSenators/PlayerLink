@@ -17,6 +17,10 @@
 #define PLAYERLINK_CORE_LOGSEVERITY_H
 
 namespace PlayerLink{namespace Core{
+    /**
+     * @brief A LogSeverity Enum to determine the severity levels of a log to help organise and filter logfiles
+     * @author Hanzalah Ravat
+     */
     enum LogSeverity {
         FATAL,
         ERROR,
