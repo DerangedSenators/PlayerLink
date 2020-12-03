@@ -25,7 +25,7 @@
  */
 
 #include <WinSock2.h>
-#include <windows.h>
+#include <Windows.h>
 
 /**
  * Attempts to initialise winsock2.dll
