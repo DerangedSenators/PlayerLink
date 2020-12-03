@@ -55,7 +55,7 @@ find_package(Boost 1.74.0 REQUIRED COMPONENTS thread date_time)
  add_library(
      PlayerLink_Core_WIN32
          platform/microsoft/win32/overlays/core/net/winsockinit.c
- )
+         platform/microsoft/win32/overlays/core/net/winsockinit.h)
 # add_library(
 #     PlayerLink_Core_UNIX
 # )

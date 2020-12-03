@@ -13,25 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/**
- * @file winsockinit.c
- * @author Hanzalah Ravat
- * @brief The methods included within this file are used by Windows editions of PlayerLink to initialise the Winsock2 Library
- *
- * As Winsock2 is available within a DLL, all processes must initialise the use of the DLL before being able to make winsock-function calls.
- * It also performs a check to ensure that Winsock features are fully present
- * @see https://docs.microsoft.com/en-us/windows/win32/winsock/initializing-winsock
- */
-
 #include <WinSock2.h>
 #include <Windows.h>
 
-/**
- * Attempts to initialise winsock2.dll
- * @return true if startup succeeds
- * @return false if there is an error when trying to initialise Winsock2.dll
- */
+#include "winsockinit.h"
+
 bool init(){
     int iResult;
     WSADATA wsaData;
