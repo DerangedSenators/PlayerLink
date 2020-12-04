@@ -5,9 +5,3 @@
 .vscode/
 build/
 out/
-
-#Doxygen Generated Files
-xml/
-docs/
-html/
-latex/
