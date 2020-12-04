@@ -20,6 +20,8 @@
 #ifdef WIN32
 #include <winsock2.h>
 #include <WS2tcpip.h>
+#include "winsockinit.h"
+
 #pragma comment(lib, "Ws2_32.lib")
 //If on Unix or POSIX Compliant Systems
 #elif UNIX
@@ -58,12 +60,13 @@ namespace PlayerLink{ namespace Core{
          * @param family Address Family.
          * @param type The type specification for the new socket
          * @param flag The protocol used for data transmission
+         * @attention Winsock2.dll is automatically initialised when using this method on a Windows Device
          * @return If no error occurs, socket returns a descriptor referencing the new socket. Otherwise, a value of -1
         */
         Socket(int family, int type, int flag);
         explicit Socket(int fd);
         /**
-         * @brief
+         * @brief Returns the IP Address of the remote device
          * @return Gets the address of the remote device
         */
         std::string getAddress() const;

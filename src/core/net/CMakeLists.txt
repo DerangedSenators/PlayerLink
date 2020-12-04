@@ -25,3 +25,9 @@ add_library(
         SocketException.cpp
         tcp/tcpsocket.cpp
 )
+
+IF(WIN32)
+    include_directories(${CMAKE_SOURCE_DIR}/src/platform/microsoft/win32/overlays/core/net/)
+   # add_(${CMAKE_SOURCE_DIR}/src/platform/microsoft/win32/overlays/core/net/)
+    target_link_libraries(PLAYERLINK_CORE_NET PRIVATE PLAYERLINK_CORE_NET_WIN32)
+ENDIF()

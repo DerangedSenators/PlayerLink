@@ -22,10 +22,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(src/core)
 
-# add_library(
-#     PlayerLink_Core_UNIX
-# )
-
 include(include/boost.cmake)
 add_subdirectory(src/core)
 add_subdirectory(src/client)
@@ -33,12 +29,6 @@ add_subdirectory(src/server)
 
 target_link_libraries(PLAYERLINK_CORE PRIVATE Boost::thread)
 
-IF(WIN32)
-        add_subdirectory(src/platform/microsoft/win32/overlays/core)
-        target_link_libraries(PLAYERLINK_CORE PRIVATE PLAYERLINK_CORE_WIN32)
-#ELSEIF(UNIX)
-#        target_link_libraries(PlayerLink_Core PRIVATE PlayerLink_Core_UNIX)
-ENDIF()
 target_link_libraries(PLAYERLINK_SERVER PRIVATE PLAYERLINK_CORE)
 target_link_libraries(PLAYERLINK_CLIENT PRIVATE PLAYERLINK_CORE)
 
