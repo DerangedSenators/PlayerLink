@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#ifndef PLAYERLINK_WINSOCKINIT_H
+#define PLAYERLINK_WINSOCKINIT_H
+
 /*
  * @file winsockinit.c
  * @author Hanzalah Ravat
@@ -23,10 +26,6 @@
  * It also performs a check to ensure that Winsock features are fully present
  * @see https://docs.microsoft.com/en-us/windows/win32/winsock/initializing-winsock
  */
-
-#ifndef PLAYERLINK_WINSOCKINIT_H
-#define PLAYERLINK_WINSOCKINIT_H
-
 
 #include <WinSock2.h>
 #include <Windows.h>
