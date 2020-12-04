@@ -17,13 +17,26 @@
 
 
 namespace PlayerLink {namespace Core {
+#ifdef UNIX
     Socket::Socket(int family, int type, int flag) : socketIsClosed(false) {
         mSocketFD = ::socket(family, type, flag);
         if (mSocketFD == -1) {
             throw SocketException("Error when creating Socket");
         }
     }
-
+#elif WIN32
+        Socket::Socket(int family, int type, int flag) : socketIsClosed(false) {
+        // Initialise Winsock
+            if(init() == 1) {
+                mSocketFD = ::socket(family, type, flag);
+                if (mSocketFD == -1) {
+                    throw SocketException("Error when creating Socket");
+                }
+            } else {
+                throw SocketException("Error: Unable to initialise Winsock2.dll");
+            }
+        }
+#endif
     Socket::Socket(int fd) :mSocketFD(fd), socketIsClosed(false) {}
 
     int Socket::getSocketDescriptor() const { return mSocketFD; }
