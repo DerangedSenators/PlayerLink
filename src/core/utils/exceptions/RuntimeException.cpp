@@ -22,9 +22,7 @@
 
 namespace PlayerLink{namespace Core{
 
-    //uses a class and method which retrieves first timestamp
-
-	RuntimeException::RuntimeException(const std::string& message)
+	RuntimeException::RuntimeException(const std::string message)
         throw () : runtimeMessage(message) {
         
         Logger* logger = Logger::getLogger();
@@ -32,6 +30,8 @@ namespace PlayerLink{namespace Core{
         logger->log(ERROR,message);
         
     }
+
+    RuntimeException::RuntimeException() throw() {}
 
     RuntimeException::~RuntimeException() throw() {}
     const char* RuntimeException::what() const throw() {

@@ -30,7 +30,8 @@ namespace PlayerLink{namespace Core{
 	private: 
 		std::string runtimeMessage;
 	public:
-		RuntimeException(const std::string& message) throw();
+		RuntimeException(const std::string message) throw();
+		RuntimeException()throw();
 		~RuntimeException() throw();
 		const char* what() const throw();
 	};
