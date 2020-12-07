@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-
 #include "RuntimeException.h"
 #include "utils/logger/Logger.h"
 
-
-
 namespace PlayerLink{namespace Core{
 
-	RuntimeException::RuntimeException(const std::string message)
-        throw () : runtimeMessage(message) {
-        
-        Logger* logger = Logger::getLogger();
-        
-        logger->log(ERROR,message);
-        
+    RuntimeException::RuntimeException(const char* message,
+                                       const boost::source_location &location)
+            : runtime_error(message) {
+        runtimeMessage = message;
     }
-
-    RuntimeException::RuntimeException() throw() {}
-
-    RuntimeException::~RuntimeException() throw() {}
     const char* RuntimeException::what() const throw() {
-        return runtimeMessage.c_str();
+        Logger* logger = Logger::getLogger();
+        logger->log(ERROR,runtimeMessage);
+        return runtimeMessage;
     }
 }}
