@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_library(
-        PLAYERLINK_CORE_CRYPTO
-        hash/sha/sha256.cpp
+SET(CRYPTO_SOURCES
         hash/sha/sha256.h
-        pki/DFH.c
-)
+        hash/sha/sha256.cpp)
+#DO not include PKI sources as they aren't compile ready
 

@@ -12,13 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_library(
-        PLAYERLINK_CORE_UTILS
-        utils.h
-)
-
 add_subdirectory(exceptions)
 add_subdirectory(logger)
-
-target_link_libraries(PLAYERLINK_CORE_UTILS PRIVATE PLAYERLINK_CORE_UTILS_EXCEPTIONS)
-target_link_libraries(PLAYERLINK_CORE_UTILS PRIVATE PLAYERLINK_CORE_UTILS_LOGGER)

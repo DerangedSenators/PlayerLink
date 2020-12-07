@@ -12,22 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_library(
-        PLAYERLINK_CORE_NET
+SET(NET_SOURCES
         NetConfig.h
         Protocols.h
         ServerCodes.h
         Socket.h
         SocketException.h
-        tcp/tcpsocket.h
 
         Socket.cpp
         SocketException.cpp
-        tcp/tcpsocket.cpp
-)
 
-IF(WIN32)
-    include_directories(${CMAKE_SOURCE_DIR}/src/platform/microsoft/win32/overlays/core/net/)
-   # add_(${CMAKE_SOURCE_DIR}/src/platform/microsoft/win32/overlays/core/net/)
-    target_link_libraries(PLAYERLINK_CORE_NET PRIVATE PLAYERLINK_CORE_NET_WIN32)
-ENDIF()
+        tcp/tcpsocket.h
+        tcp/tcpsocket.cpp)

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.19)
 project(PlayerLink
         VERSION 1.0.0
         DESCRIPTION "Multiplayer API written in C++. Can be used for multiplayer games where server side processing needs to be kept as low as possible"
