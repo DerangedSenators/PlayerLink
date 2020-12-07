@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.19)
 project(PlayerLink
         VERSION 1.0.0
         DESCRIPTION "Multiplayer API written in C++. Can be used for multiplayer games where server side processing needs to be kept as low as possible"
@@ -26,7 +26,7 @@ include(include/boost.cmake)
 add_subdirectory(src/core)
 add_subdirectory(src/client)
 add_subdirectory(src/server)
-
+add_subdirectory(src-tests)
 target_link_libraries(PLAYERLINK_CORE PRIVATE Boost::thread)
 
 target_link_libraries(PLAYERLINK_SERVER PRIVATE PLAYERLINK_CORE)

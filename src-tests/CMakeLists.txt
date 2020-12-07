@@ -11,14 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+include_directories("${CMAKE_SOURCE_DIR}/src/core/")
+link_directories("${CMAKE_SOURCE_DIR}/src/core/")
+add_executable(PlayerLinkRTE-Test RuntimeExceptionTests.cpp)
 
-SET(NET_SOURCES
-        NetConfig.h
-        Protocols.h
-        ServerCodes.h
-        Socket.h
-
-        Socket.cpp
-
-        tcp/tcpsocket.h
-        tcp/tcpsocket.cpp)
+target_link_libraries(PlayerLinkRTE-Test  PLAYERLINK_CORE)

@@ -11,10 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-add_library(
-        PLAYERLINK_CORE_UTILS_LOGGER
+
+SET(UTILS_LOGGER_SOURCES
         Logger.h
         LogSeverity.h
 
         Logger.cpp
-)
+        )

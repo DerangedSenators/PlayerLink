@@ -39,14 +39,14 @@ namespace PlayerLink{namespace Server{
 			std::string clientPort = std::to_string(client.getPort());
 			// ADD LOG INPUT HERE TO LOG THE CONNECTION
 			mQueueMutex.lock();
-			char username = (char)(client.recieveBytes());
+			char* username = (char*)(client.recieveBytes());
 			if (username != NULL) {
 				Player mPlayer(std::to_string(client.getSocketDescriptor()), username, std::to_string(client.getPort()));
 				mPlayers[mPlayer.mIP + ":" + mPlayer.mID] = mPlayer;
 			}
 			else {
 				client.close();
-				throw SocketException("Unable to recieve bytes from client" + client.getAddress());
+				throw RuntimeException(("Unable to recieve bytes from client" + client.getAddress()).c_str());
 			}
 			mQueueMutex.unlock();
 

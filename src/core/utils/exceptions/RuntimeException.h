@@ -20,31 +20,33 @@
 
 #include <string>
 #include <exception>
+#include <stdexcept>
+#include <string_view>
+#include <boost/assert.hpp>
+#include <boost/assert/source_location.hpp>
 
 namespace PlayerLink{namespace Core{
 	/**
-	 * @author Ash Jaimal
-	 * @brief exception class for Runtime environment, throws exceptions whenver an issue occurs with connectivity
+	 * @authors Ash Jaimal
+	 * @authors Hanzalah Ravat
+	 * @brief exception class for Runtime environment, throws exceptions whenver an issue occurs with connectivity or any other runtime related error occurs
 	*/
-	class RuntimeException : public std::exception {
+	class RuntimeException : public std::runtime_error {
 	private: 
-		std::string runtimeMessage;
+		const char* runtimeMessage;
+    protected:
+
 	public:
-		RuntimeException(const std::string& message) throw();
-		~RuntimeException() throw();
+	    /**
+	     * Creates a Runtime Exception
+	     * @param message The error message
+	     * @param location The Location of the error. This is an optional parameter and is typically taken by default
+	     */
+	    RuntimeException(const char* message,
+                         const boost::source_location &location = BOOST_CURRENT_LOCATION);
+
 		const char* what() const throw();
 	};
 }}
-
-
-
-
-
-
-
-
-
-
-
 
 #endif

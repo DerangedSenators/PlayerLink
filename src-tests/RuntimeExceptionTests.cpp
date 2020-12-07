@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "SocketException.h"
 
-#include <utility>
+#include "utils/exceptions/RuntimeException.h"
 
-namespace PlayerLink{namespace Core{
+void throwRTException();
+using namespace PlayerLink::Core;
+int main(){
+    printf("Hello World! \n");
+    throwRTException();
+    printf("Exception Thrown!");
+    return 0;
+}
 
-    SocketException::SocketException(std::string  message)
-        throw () : mUserMessage(std::move(message)) {}
-
-    SocketException::~SocketException() throw() {}
-    const char* SocketException::what() const throw() {
-        return mUserMessage.c_str();
-    }
-}}
-
-
+void throwRTException(){
+    throw RuntimeException("ERROR when doing nothing");
+}

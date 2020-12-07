@@ -24,16 +24,16 @@
 
 #pragma comment(lib, "Ws2_32.lib")
 //If on Unix or POSIX Compliant Systems
-#elif UNIX
+#elif unix
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <poll.h>
 #endif //WIN64 or Linux checks for the compiler
-#ifdef __unix__
+#ifdef unix
 #define SOCKETPOLL poll
-#define CLOSESOCKET close
+#define CLOSESOCKET ::close
 #elif _WIN32
 #define SOCKETPOLL WSAPoll
 #define CLOSESOCKET closesocket
@@ -41,10 +41,11 @@
 // Protocols
 #include "Protocols.h"
 #include "NetConfig.h"
-#include "SocketException.h"
+#include "utils/exceptions/RuntimeException.h"
 #define SA struct sockaddr
 #include <string>
 #include <cstring>
+
 
 
 namespace PlayerLink{ namespace Core{

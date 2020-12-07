@@ -21,12 +21,16 @@
 #include <string>
 #include <mutex>
 #include "LogSeverity.h"
+#include <boost/assert.hpp>
+#include <boost/assert/source_location.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/posix_time_io.hpp>
 
 namespace PlayerLink{namespace Core{
     /**
      * @brief A Singelton Logger class which will be used by PlayerLink to create logs based on a severity level and append to a logfile
-     * @author Hanzalah Ravat
-     * @author Ashwin Jaimal
+     * @authors Hanzalah Ravat
+     * @authors Ashwin Jaimal
      */
     class Logger {
     private:
@@ -56,7 +60,7 @@ namespace PlayerLink{namespace Core{
          * @param severity The Severity level of the log
          * @param message The message which will be written into the logfile
          */
-        void log(LogSeverity severity, std::string message);
+        void log(LogSeverity severity, std::string message,const boost::source_location& location = BOOST_CURRENT_LOCATION);
 
     };
 }}

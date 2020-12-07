@@ -13,16 +13,32 @@
 # limitations under the License.
 
 # PlayerLink Core Library Components
+# Add subdirs
+project(PLAYERLINK_CORE)
+add_subdirectory(crypto)
+add_subdirectory(net)
+add_subdirectory(utils)
 
 add_library(
         PLAYERLINK_CORE
         PlayerLinkCore.h
+
+        crypto/hash/sha/sha256.h
+        crypto/hash/sha/sha256.cpp
+
+        net/NetConfig.h
+        net/Socket.h
+        net/ServerCodes.h
+        net/Protocols.h
+        net/Socket.cpp
+        net/tcp/tcpsocket.h
+        net/tcp/tcpsocket.cpp
+
+        utils/logger/LogSeverity.h
+        utils/logger/Logger.h
+        utils/logger/Logger.cpp
+        utils/exceptions/RuntimeException.h
+        utils/exceptions/RuntimeException.cpp
 )
-# Add subdirs
-add_subdirectory(crypto)
-add_subdirectory(net)
-add_subdirectory(utils)
-# Link subdirs
-target_link_libraries(PLAYERLINK_CORE PRIVATE PLAYERLINK_CORE_CRYPTO)
-target_link_libraries(PLAYERLINK_CORE PRIVATE PLAYERLINK_CORE_NET)
-target_link_libraries(PLAYERLINK_CORE PRIVATE PLAYERLINK_CORE_UTILS)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
+set_target_properties(PLAYERLINK_CORE PROPERTIES LINKER_LANGUAGE CXX)

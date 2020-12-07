@@ -12,13 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SET(NET_SOURCES
-        NetConfig.h
-        Protocols.h
-        ServerCodes.h
-        Socket.h
+# Finds and includes the protobuf directories to allow PlayerLink Components to use Protobuf
+FIND_PACKAGE(Protobuf REQUIRED)
+INCLUDE_DIRECTORIES(${Protobuf_INCLUDE_DIRS})
 
-        Socket.cpp
-
-        tcp/tcpsocket.h
-        tcp/tcpsocket.cpp)
+TARGET_LINK_LIBRARIES(PLAYERLINK_CORE ${Protobuf_LIBRARIES})
