@@ -26,7 +26,7 @@ include(include/boost.cmake)
 add_subdirectory(src/core)
 add_subdirectory(src/client)
 add_subdirectory(src/server)
-
+add_subdirectory(src-tests)
 target_link_libraries(PLAYERLINK_CORE PRIVATE Boost::thread)
 
 target_link_libraries(PLAYERLINK_SERVER PRIVATE PLAYERLINK_CORE)
