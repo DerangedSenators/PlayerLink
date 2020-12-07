@@ -45,7 +45,7 @@ namespace PlayerLink {namespace Core {
         sockaddr_in address;
         uint32_t addressLength = sizeof(address);
         if (getpeername(mSocketFD, (sockaddr*)&address, (socklen_t*)addressLength) < 0) {
-            throw SocketException("Fetch of Remote Address Failed");
+            throw RuntimeException("Fetch of Remote Address Failed");
         }
         return inet_ntoa(address.sin_addr);
     }
@@ -54,7 +54,7 @@ namespace PlayerLink {namespace Core {
         sockaddr_in address;
         uint32_t addressLength = sizeof(address);
         if (getpeername(mSocketFD, (sockaddr*)&address, (socklen_t*)addressLength) < 0) {
-            throw SocketException("Fetch of Remote Port Failed");
+            throw RuntimeException("Fetch of Remote Port Failed");
         }
         return ntohs(address.sin_port);
     }

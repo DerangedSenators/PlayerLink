@@ -31,16 +31,16 @@ namespace PlayerLink{namespace Server{
 		int status = getaddrinfo(NULL, port.c_str(), &hostInfo, &hostsInfoList);
 
 		if (status != 0) {
-			throw SocketException(gai_strerror(status));
+			throw RuntimeException(gai_strerror(status));
 		}
 		char yes = 1;
 		setsockopt(mSocketFD, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
 
 		if (::bind(mSocketFD, hostsInfoList->ai_addr, hostsInfoList->ai_addrlen) == -1) {
-			throw SocketException("Error when binding socket to port: " + port);
+			throw RuntimeException(("Error when binding socket to port: " + port).c_str());
 		}
 		if (::listen(mSocketFD, backlog) == -1) {
-			throw SocketException("Error when trying to accept socket connection.");
+			throw RuntimeException("Error when trying to accept socket connection.");
 		}
 	}
 
@@ -49,7 +49,7 @@ namespace PlayerLink{namespace Server{
 		socklen_t clientAddressSize = sizeof(clientAddress);
 		int newSocketFD = ::accept(mSocketFD, (struct sockaddr*)&clientAddress, &clientAddressSize);
 		if (newSocketFD == -1) {
-			throw SocketException("Error when trying to accept the socket connection");
+			throw RuntimeException("Error when trying to accept the socket connection");
 		}
 		return TCPSocket(newSocketFD);
 	}
@@ -78,7 +78,7 @@ namespace PlayerLink{namespace Server{
 		std::vector<TCPSocket> events;
 		int status = SOCKETPOLL(&mMonitorFDs[0], mMonitorFDs.size(), timeout);
 		if (status == -1) {
-			throw SocketException("Error while pooling socket connection");
+			throw RuntimeException("Error while pooling socket connection");
 		}
 		else if (status == 0) {
 			return events;

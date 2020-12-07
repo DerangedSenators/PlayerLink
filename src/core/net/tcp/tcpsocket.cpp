@@ -36,14 +36,14 @@ bool TCPSocket::connect(std::string address, std::string port) {
 
 	int status = getaddrinfo(address.c_str(), port.c_str(), &hostInfo, &hostsInfoList);
 	if (status != 0) {
-		throw SocketException(gai_strerror(status));
+		throw RuntimeException(gai_strerror(status));
 	}
 
 	status = ::connect(mSocketFD, hostsInfoList->ai_addr, hostsInfoList->ai_addrlen);
 	freeaddrinfo(hostsInfoList);
 
 	if (status == -1) {
-		throw SocketException("Error whilst connecting socket to: " + address + ": " + port);
+		throw RuntimeException(("Error whilst connecting socket to: " + address + ": " + port).c_str());
 	}
 	mPollFD.fd = mSocketFD;
 	mPollFD.events = POLLIN;
@@ -67,7 +67,7 @@ bool TCPSocket::connectWithTimeout(std::string address, std::string port, int se
 
 	int status = getaddrinfo(address.c_str(), port.c_str(), &hostInfo, &hostsInfoList);
 	if (status != 0) {
-		throw SocketException(gai_strerror(status));
+		throw RuntimeException(gai_strerror(status));
 	}
 
 	::connect(mSocketFD, hostsInfoList->ai_addr, hostsInfoList->ai_addrlen);
@@ -84,11 +84,11 @@ bool TCPSocket::connectWithTimeout(std::string address, std::string port, int se
 		socklen_t length = sizeof sockErr;
 		getsockopt(mSocketFD, SOL_SOCKET, SO_ERROR, &sockErr, &length);
 		if (sockErr != 0) {
-			throw SocketException("Error whilst connecting socket to: " + address + ": " + port);
+			throw RuntimeException(("Error whilst connecting socket to: " + address + ": " + port).c_str());
 		}
 	}
 	else {
-		throw SocketException("Error whilst connecting socket to: " + address + ": " + port);
+		throw RuntimeException(("Error whilst connecting socket to: " + address + ": " + port).c_str());
 	}
 	setBlocking(true);
 	mPollFD.fd = mSocketFD;
@@ -97,7 +97,7 @@ bool TCPSocket::connectWithTimeout(std::string address, std::string port, int se
 bool TCPSocket::canReceive(int timeout) {
 	int status = SOCKETPOLL(&mPollFD, 1, timeout);
 	if (status == -1) {
-		throw SocketException("Error while pooling connection");
+		throw RuntimeException("Error while pooling connection");
 	}
 	else if (status == 0) {
 		return false;
@@ -118,7 +118,7 @@ size_t TCPSocket::recieveAll(void* buffer, size_t bufferLength) {
 	while (toReturn < bufferLength) {
 		result = ::recv(mSocketFD, (rawType*)buffer, bufferLength, 0);
 		if (result < 0) {
-			throw SocketException("Error while receiving information from the Socket");
+			throw RuntimeException("Error while receiving information from the Socket");
 		} else if (result == 0){
 			break;
 		}
@@ -134,7 +134,7 @@ unsigned char* TCPSocket::recieveBytes() {
 	/* Read the Incoming Size*/
 	byteCount = recv(mSocketFD, (char*)&byteLength, sizeof(byteLength), 0);
 	if (byteCount < 0) {
-		throw SocketException("Error while recieving informaiton from the socket");
+		throw RuntimeException("Error while recieving informaiton from the socket");
 		return NULL;
 	}
 	else {
@@ -143,7 +143,7 @@ unsigned char* TCPSocket::recieveBytes() {
 		// Read the bytes
 		byteCount = recv(mSocketFD,reinterpret_cast<char*>(buffer), byteLength, 0);
 		if (byteCount < 0) {
-			throw SocketException("Error when Parsing Data");
+			throw RuntimeException("Error when Parsing Data");
 			return NULL;
 		}
 		return buffer;
@@ -161,7 +161,7 @@ size_t TCPSocket::sendAll(void const* buffer, size_t bufferLength) {
 	while (toReturn < bufferLength) {
 		result = ::send(mSocketFD, (rawType*)buffer, bufferLength, 0);
 		if (result < 0) {
-			throw SocketException("Error while receiving information from the Socket");
+			throw RuntimeException("Error while receiving information from the Socket");
 		}
 		else if (result == 0) {
 			break;
