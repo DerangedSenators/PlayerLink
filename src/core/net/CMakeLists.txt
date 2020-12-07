@@ -17,10 +17,8 @@ SET(NET_SOURCES
         Protocols.h
         ServerCodes.h
         Socket.h
-        SocketException.h
 
         Socket.cpp
-        SocketException.cpp
 
         tcp/tcpsocket.h
         tcp/tcpsocket.cpp)
