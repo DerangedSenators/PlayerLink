@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-#include "net/SocketException.h"
+#include "utils/exceptions/RuntimeException.h"
 
 void throwRTException();
-
+using namespace PlayerLink::Core;
 int main(){
     printf("Hello World! \n");
     throwRTException();
@@ -26,5 +26,5 @@ int main(){
 }
 
 void throwRTException(){
-    throw PlayerLink::Core::SocketException("ERROR when doing nothing");
+    throw RuntimeException("ERROR when doing nothing");
 }
