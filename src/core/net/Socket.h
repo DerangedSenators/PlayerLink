@@ -33,7 +33,7 @@
 #endif //WIN64 or Linux checks for the compiler
 #ifdef unix
 #define SOCKETPOLL poll
-#define CLOSESOCKET close
+#define CLOSESOCKET ::close
 #elif _WIN32
 #define SOCKETPOLL WSAPoll
 #define CLOSESOCKET closesocket
