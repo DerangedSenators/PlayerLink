@@ -18,7 +18,10 @@
 #include <fstream>
 #include <chrono>
 #include <ctime>
+#define SPACE +" "+
 namespace PlayerLink{namespace Core{
+    Logger* Logger::mInstance = nullptr;
+    std::mutex Logger::mMutex;
     Logger::Logger() {}
     Logger::~Logger() {}
 
@@ -29,23 +32,45 @@ namespace PlayerLink{namespace Core{
         }
         return mInstance;
     }
-    void Logger::log(LogSeverity severity, std::string message)
+    void Logger::log(LogSeverity severity, std::string message,const boost::source_location& location)
     {
    
         //timing
         using Clock = std::chrono::steady_clock;
         auto tick = Clock::now;
-
-        std::string logSev = (severity,message);
-        
+        const std::string str_time = boost::posix_time::to_iso_string(boost::posix_time::second_clock::local_time());
+        std::string fName = location.file_name();
+        std::string lFunction = location.function_name();
+        std::string locationSTR = fName + lFunction;
+        std::string strSeverity;
+        switch(severity){
+            case FATAL:
+                strSeverity = "FATAL";
+                break;
+            case ERROR:
+                strSeverity = "ERROR";
+                break;
+            case WARNING:
+                strSeverity = "WARNING";
+                break;
+            case INFO:
+                strSeverity = "INFO";
+                break;
+            case DEBUG:
+                strSeverity = "DEBUG";
+                break;
+            case TRACE:
+                strSeverity = "TRACE";
+                break;
+        }
+        std::string logSev = "LOGSEVERITY: " + strSeverity SPACE "Location: " + locationSTR  SPACE + "Message: " SPACE message;
         //files the logger
         std::ofstream logFile;
-        logFile.open("LOG FILE.txt");
-        logFile << tick, logSev;
-        logFile << "/n";
+        logFile.open("LOG FILE.txt",std::ios_base::app);
+        std::string out =  "[" + str_time SPACE logSev + "]";
+        logFile << out;
+        logFile << "\n";
         logFile.close();
-
-
 
     }
 }}
