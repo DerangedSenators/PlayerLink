@@ -5,7 +5,7 @@ The PlayerLink repository contains the source code for both server and client ba
 ## Repository Layout
 
 The Repository is layed out as follows:
-📂 📦 ┣ ┃
+
 ```
 📦 PlayerLink
 ┃
@@ -42,4 +42,4 @@ The Repository is layed out as follows:
  ┃ ┣ 📂net // Network sources
  ┃ ┣ 📂room //GameRoom sources
  
-        
+  ```      
